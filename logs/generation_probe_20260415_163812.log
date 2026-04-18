@@ -1,0 +1,896 @@
+Starting Generation Probe at 20260415_163812
+Logging to /config/workspace/arch/v5.5/logs/generation_probe_20260415_163812.log
+--------------------------------------------------------------------------------
+  CWT v5.5 Configuration:
+    Pondering: Adaptive (max 5)
+    Probe: Shared Embedding, Stratified (last 5 + 1 random)
+    Hub: 384 | Total d_s: 896
+    Conv distill weight: 0.001
+    CWT-MLA: d_kv_latent=128
+Using device: cuda
+Loading checkpoint: /config/workspace/arch/v5.5/checkpoints/step_20000.pt
+--------------------------------------------------------------------------------
+
+
+================================================================================
+CATEGORY: Clearly in-distribution (gate should stay flat)
+================================================================================
+
+
+>>> PROMPT: 'The process of photosynthesis involves '
+
+Generated: The process of photosynthesis involves ________
+- The reaction of the photosystem (solar) to the substrate (solar) as well as the removal of nutrients from the substrate (hormones)
+- The reaction of the reaction with ________
+- The reaction of
+
+--- Early Exit Trace ---
+  No tokens exited early.
+
+============================================================
+ LATENT COGNITIVE DASHBOARD
+============================================================
+  Semantic Workload (Depth) : [▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇]
+  Ponder Loops Executed     : [▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆]
+  Memory Edits (Magnitude)  : [ █▅▂ ▃▂▂▂▂▃▂▆▄  ▂▃▂▅▃▃▅  ▂ ▂ ▂▂▃ ▃▄▂▅ ▂  ▃ ▃ ▂▄▂▃▂]
+  Hub Activity (Shared)     : [ █▅▂▂▃▂▂▂▃▃▂▆▄  ▂▃▃▅▃▃▅ ▂▂▂▂ ▂▂▃▂▃▄▃▅ ▂▂ ▃ ▃ ▂▄▂▄▃]
+
+  ──────────────────────────── Epistemic Channels ────────────────────────────
+  Entropy (Doubt)           : [▂▇▅▃▂▂ ▃▃▂  ▅▃ ▆▃▂▃▆▄▃▅▃  ▅ ▂▆▄▂ ▃▆▄▅▂▃▂▂█▄ ▂ ▄▃▄▃]
+  Non-Convergence           : [ ▆▃▂ ▄▂▂▂▃▃▂█▅▂ ▃▄▃▇▂▃▆▂ ▃ ▂ ▃▃▂▂▄▅▄▄▂ ▃▂▃▃▃ ▄▄▃▃▄]
+  Workspace Saturation      : [▇█▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇]
+  Hub Churn                 : [▃▆▅▅▆▄▄▂▆▅▂▅▄▄▄▆▄ ▅▄▃█▄▆▅▄▆▄▄▆▄▂▄▅▄▄▄▆▆▄▄▅▄▄▄▂▃▆▆▆]
+  S1/S2 Veto Rate           : N/A (conv head mode)
+  Epistemic Gate (mean)     : [▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇]
+  Epistemic Gate (std)      : [▃█▅▄▄▃ ▄▄▃▂ ▅▄ ▅▄▃▄▆▅▄▄▄▂▂▅▂▃▆▅▃▂▄▆▄▅▄▄▃▄█▄▂▄ ▅▄▅▄]
+  Epistemic State           : [◐○○◐◐◐◐◐◐◐◐◐○◐◐○◐◐◐○○◐○◐◐◐○◐◐○○◐◐◐○○○◐◐◐◐○○◐◐◐○◐○◐]
+    ● convergent  ◐ resolvable  ○ unresolvable
+
+────────────────────────────────────────────────────────────
+  Avg Active Layers    : 18.0 / 8
+  Avg Ponder Loops     : 5.00
+  Avg Memory Write Mag : 2.47
+  Avg Entropy          : 0.2919
+  Avg Non-Convergence  : 2.2645
+  Avg Workspace Sat.   : 0.9820
+  Avg Hub Churn        : 0.8752
+  Avg Veto Rate        : N/A (conv head mode)
+  Avg Gate Value       : 0.9531
+  Generation Speed     : 15.19 tokens/sec
+
+  ──────────── Cache Dynamics ────────────
+  Cache Ponder Churn       : [▆▅▆▄▅▄▃▇▇▄▅▅▅▄▄▇▅▆▆▆▄▅▅▄▄▄▇▄▄█▅▆▆▅▅▅▅▄▅▄▄▇▅▅▆▄▄▄▄▄]
+  Cache Diversity (inv)    : [▄▃▄▃▃▃▃▄▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃]
+  Avg ponder delta/step  : 1.5854
+  Ponder converging      : 0.0%
+  Ponder diverging       : 0.0%
+  Ponder flat            : 100.0%
+  Cross-position sim     : 0.3685
+  Similarity trend       : falling ✓ (-0.1016)
+============================================================
+
+
+>>> PROMPT: 'In the United States, the Constitution '
+
+Generated: In the United States, the Constitution  has made the most direct connection between the Constitution and Federalist writings of any kind.
+The Constitution of the United States of America also covers the Constitution and its several branches. The Constitution is the only document which has been in existence in the United States
+
+--- Early Exit Trace ---
+  No tokens exited early.
+
+============================================================
+ LATENT COGNITIVE DASHBOARD
+============================================================
+  Semantic Workload (Depth) : [▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇]
+  Ponder Loops Executed     : [▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆]
+  Memory Edits (Magnitude)  : [▃▄▄▅▅▃▄▃▃▄▂▃▄▄▄▇▆█ ▂▄▃▂▅▄▄▃▄▂▂▃▄▃▃  ▂▂▄▆▄▄▃▃▄▅▂▂▂▅]
+  Hub Activity (Shared)     : [▃▄▄▅▅▃▄▃▃▄▂▃▄▄▄▇▆█ ▂▃▃▂▄▄▄▃▄▂▂▃▄▃▃  ▂▂▄▅▄▃▃▃▃▄▂▂▂▄]
+
+  ──────────────────────────── Epistemic Channels ────────────────────────────
+  Entropy (Doubt)           : [▂▃▃▅▄▃▂▂▂▂▂▂▇▄▅█▃▄  ▂▂ ▃▂▃▃▃▂▂▃▃▃▂  ▂▂▃▄▃▄▃▃▃▄▂▂ ▄]
+  Non-Convergence           : [▃▄▃▄▅▃▄▃▃▅ ▃▄▅▆▆▆█ ▂▄▄▂▄▆▅▂▄▃▃▄▄▄▃  ▂▃▅▅▃▄▄▄▄▅▂▂▂▄]
+  Workspace Saturation      : [▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇█▇▇▇▇▇▇▇▇▇▇▇▇]
+  Hub Churn                 : [▄▃ ▄▅▃▃▃▃▄▃▂▅ ▄█▆▇▄▅▃▃▄▅▃▆▅▆▃▃▃▅▅▅▄▄▅▅▃▅▅▅▅▅▄█▃▃▃▅]
+  S1/S2 Veto Rate           : N/A (conv head mode)
+  Epistemic Gate (mean)     : [▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇]
+  Epistemic Gate (std)      : [▂▃▃▄▃▃▂▂▃▃▂▂█▃▄█▃▃  ▂▃ ▃▂▃▃▃▂▂▃▃▃▃  ▂▂▃▃▃▃▃▃▃▄▂▂ ▃]
+  Epistemic State           : [◐◐◐○○◐◐◐◐◐◐◐○○○○○○◐◐◐◐◐◐◐○○◐◐◐○○◐◐◐◐◐◐◐○◐○◐○○○◐◐◐○]
+    ● convergent  ◐ resolvable  ○ unresolvable
+
+────────────────────────────────────────────────────────────
+  Avg Active Layers    : 18.0 / 8
+  Avg Ponder Loops     : 5.00
+  Avg Memory Write Mag : 2.49
+  Avg Entropy          : 0.2892
+  Avg Non-Convergence  : 2.2322
+  Avg Workspace Sat.   : 0.9834
+  Avg Hub Churn        : 0.8858
+  Avg Veto Rate        : N/A (conv head mode)
+  Avg Gate Value       : 0.9531
+  Generation Speed     : 19.14 tokens/sec
+
+  ──────────── Cache Dynamics ────────────
+  Cache Ponder Churn       : [▃▄▄▄▄▅▅▄▄▆▄▅█▄▅▇▂▂▃▄▄▃▄▅▄▅▄▄▄▅▅▄▅▆▃▃▄▃▃▄▃▄▃▄▃▄▃▃▄▄]
+  Cache Diversity (inv)    : [▄▄▄▄▄▄▄▄▄▄▄▄▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃]
+  Avg ponder delta/step  : 1.3354
+  Ponder converging      : 0.0%
+  Ponder diverging       : 0.0%
+  Ponder flat            : 100.0%
+  Cross-position sim     : 0.4280
+  Similarity trend       : falling ✓ (-0.1523)
+============================================================
+
+
+>>> PROMPT: 'Water molecules are composed of '
+
+Generated: Water molecules are composed of ______________
+and ____________. The __________ in the _______________ is the ____________ of the __________ of the ___________ of the _______________ of the ______ ___________. The _______________ of 
+
+--- Early Exit Trace ---
+  No tokens exited early.
+
+============================================================
+ LATENT COGNITIVE DASHBOARD
+============================================================
+  Semantic Workload (Depth) : [▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇]
+  Ponder Loops Executed     : [▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆]
+  Memory Edits (Magnitude)  : [▂▂█▄▄▂▃  ▃▂▃▂▂▃▂▃▂▃▃▂▃▂▂▃▂▃▂▂▃▂▃▂▂▃▂▂▂▂▂▃▃▃  ▃▂▃▃▃]
+  Hub Activity (Shared)     : [▂▂█▃▃▂▃  ▂▂▃▂▂▃▂▃▂▂▃▂▃▂▂▃▂▃▂▂▃▂▃▂▂▃▂▂▂▂▂▃▃▃  ▂▂▃▃▃]
+
+  ──────────────────────────── Epistemic Channels ────────────────────────────
+  Entropy (Doubt)           : [ ▄▇▅▄▂▅   ▂▅▄▃▂▄█▃▄▄▃▆▃▂▂▂▄▃▂▂▂▅▃▃▃▂▄▄▄▄▄▂▅ ▂▂▂▆▆▂]
+  Non-Convergence           : [ ▂█▄▄▂▃▂ ▂▂▃▃ ▃▂▃▂▃▃▂▃▃▂▃▂▃▃▂▂▂▃▂▂▂▂▂▃▂ ▃▂▃ ▂▂▂▂▃▃]
+  Workspace Saturation      : [▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇█]
+  Hub Churn                 : [ ▆▇▅▆▅▆▃▅▄▄█▃▃▄▃▇▄▃▃▃▅▃▃▃▂▅▂▃▃▂▅▂▃▃▂▅▂▃▅▂ ▅▄▅▄▃▅▃▄]
+  S1/S2 Veto Rate           : N/A (conv head mode)
+  Epistemic Gate (mean)     : [▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇]
+  Epistemic Gate (std)      : [▂▅█▅▄▄▅  ▂▃▅▄▄▃▄█▄▄▄▄▅▄▄▄▃▅▄▄▄▃▅▄▄▄▃▅▄▄▄▄▄▅▂▄▂▂▅▅▄]
+  Epistemic State           : [◐○○○○◐○◐◐◐◐○◐◐◐○○◐○◐◐○◐◐◐◐○◐◐◐◐○◐◐◐◐○○○○○◐○◐◐◐◐○○◐]
+    ● convergent  ◐ resolvable  ○ unresolvable
+
+────────────────────────────────────────────────────────────
+  Avg Active Layers    : 18.0 / 8
+  Avg Ponder Loops     : 5.00
+  Avg Memory Write Mag : 2.54
+  Avg Entropy          : 0.2875
+  Avg Non-Convergence  : 2.2810
+  Avg Workspace Sat.   : 0.9819
+  Avg Hub Churn        : 0.8828
+  Avg Veto Rate        : N/A (conv head mode)
+  Avg Gate Value       : 0.9531
+  Generation Speed     : 19.14 tokens/sec
+
+  ──────────── Cache Dynamics ────────────
+  Cache Ponder Churn       : [▅▅▂▄▅▅▆▃▃▄▅▅▅▃▄▆▇▃▃▅▅▆▅▃▄▅▅▄▃▄▅▆▄▃▄▅▆▄▃▅▅▅▆▃▃▄▅█▅▄]
+  Cache Diversity (inv)    : [▄▄▄▄▄▄▄▃▄▄▄▄▄▄▄▃▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄]
+  Avg ponder delta/step  : 1.5738
+  Ponder converging      : 0.0%
+  Ponder diverging       : 0.0%
+  Ponder flat            : 100.0%
+  Cross-position sim     : 0.4398
+  Similarity trend       : falling ✓ (-0.0645)
+============================================================
+
+
+================================================================================
+CATEGORY: Clearly OOD (gate should activate)
+================================================================================
+
+
+>>> PROMPT: 'lmao bruh fr fr no cap 💀 '
+
+Generated: lmao bruh fr fr no cap 💀 Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â 
+
+--- Early Exit Trace ---
+  No tokens exited early.
+
+============================================================
+ LATENT COGNITIVE DASHBOARD
+============================================================
+  Semantic Workload (Depth) : [▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇]
+  Ponder Loops Executed     : [▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆]
+  Memory Edits (Magnitude)  : [ ▃▂▃▃▅▅▆▅▆▆▇▆▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇]
+  Hub Activity (Shared)     : [ ▂▂▃▄▄▅▅▆▆▆▆▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇█▇▇▇▇▇▇]
+
+  ──────────────────────────── Epistemic Channels ────────────────────────────
+  Entropy (Doubt)           : [  ▂ ▃▂▄▂▅▃▆▃▇▄▇▄▇▄▇▄▇▄▇▄▇▄▇▄▇▄▇▃█▃▇▃▇▃▇▃▇▄▇▄▇▄▇▄▇▄]
+  Non-Convergence           : [ ▃▂▄▃▅▄▆▆▆▆▇▇▇▇▇▇▇▇█▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇]
+  Workspace Saturation      : [▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇█▇▇▇▇▇▇]
+  Hub Churn                 : [▃ ▅ ▄▂▅▂▅▃▅▂▆▂▆▂▆▂▆▂▆▂▆▂▆▂▆▂▆▂▆▂█▂▆▂▆▂▆▂▆▂▆▂█▂█▃█▃]
+  S1/S2 Veto Rate           : N/A (conv head mode)
+  Epistemic Gate (mean)     : [▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇]
+  Epistemic Gate (std)      : [▃ ▃▂▄▃▄▃▆▄▆▄▇▄█▄█▄█▄█▄█▄█▄█▄█▄█▄█▄█▄█▄█▄█▄█▄█▄█▄█▄]
+  Epistemic State           : [◐◐◐◐○◐○○○○○○○○○○○○○○○○○○○○○○○○○○○○○○○○○○○○○○○○○○○○]
+    ● convergent  ◐ resolvable  ○ unresolvable
+
+────────────────────────────────────────────────────────────
+  Avg Active Layers    : 18.0 / 8
+  Avg Ponder Loops     : 5.00
+  Avg Memory Write Mag : 3.10
+  Avg Entropy          : 0.3592
+  Avg Non-Convergence  : 2.6465
+  Avg Workspace Sat.   : 0.9866
+  Avg Hub Churn        : 0.8981
+  Avg Veto Rate        : N/A (conv head mode)
+  Avg Gate Value       : 0.9531
+  Generation Speed     : 19.16 tokens/sec
+
+  ──────────── Cache Dynamics ────────────
+  Cache Ponder Churn       : [█▇▇▅▆▅▆▅▆▅▆▅▆▅▆▅▆▅▆▅▆▅▆▅▆▅▆▅▆▅▆▅▆▅▆▅▆▅▆▅▆▅▆▅▆▅▆▅▆▅]
+  Cache Diversity (inv)    : [▃▃▃▃▃▃▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▅▅▅▅▅▅▅▅▅▅▅▅▅▅▅▅▅▅▅▅▅▅▅]
+  Avg ponder delta/step  : 1.4453
+  Ponder converging      : 0.0%
+  Ponder diverging       : 0.0%
+  Ponder flat            : 100.0%
+  Cross-position sim     : 0.5475
+  Similarity trend       : rising ⚠ (+0.2461)
+============================================================
+
+
+>>> PROMPT: 'SELECT * FROM users WHERE id = '
+
+Generated: SELECT * FROM users WHERE id = 
+- if the user had a new user,
+- if the user had a new user,
+- if the user had given a new password,
+- if it had received a new password,
+- if it had given a new password
+
+--- Early Exit Trace ---
+  No tokens exited early.
+
+============================================================
+ LATENT COGNITIVE DASHBOARD
+============================================================
+  Semantic Workload (Depth) : [▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇]
+  Ponder Loops Executed     : [▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆]
+  Memory Edits (Magnitude)  : [█   ▂   ▂ ▂▃▂ ▂  ▂▃ ▂▃▂▂▃▂▂ ▃  ▂▃▂▂▂▂ ▂  ▂▃▂▂▃▃▂▃ ]
+  Hub Activity (Shared)     : [█   ▂   ▂ ▂▃  ▂  ▂▃ ▂▃▂ ▂▂▂ ▂  ▂▃▂ ▂▂ ▂  ▂▂▂▂▂▃ ▂ ]
+
+  ──────────────────────────── Epistemic Channels ────────────────────────────
+  Entropy (Doubt)           : [▇ ▂ ▃ ▂ ▅▂▅▄▂▃▅▃▃▃█▄▅▅▃▃▄▄▃▂▃▆▅▄▄▃▇▆▃▃▄▅▄▃▄▃▆▆▆▄▅▄]
+  Non-Convergence           : [█ ▂  ▂  ▂▂▃▄▂▂▃▂▂▃▄▂▃▄▃▂▃▃▂▂▃▂▂▃▃▃▂▃▃▃▃▂▂▃▃▃▃▃▄▃▃▂]
+  Workspace Saturation      : [▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇█▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇]
+  Hub Churn                 : [█▃▃▂▄▃▃▄▂▂ ▂▃▂▄▄▂▄▃   ▃▂▃▄▄▃▄▃   ▂▃▅▅▃▄▂   ▂▄▅▅▃▄▂]
+  S1/S2 Veto Rate           : N/A (conv head mode)
+  Epistemic Gate (mean)     : [▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇]
+  Epistemic Gate (std)      : [█ ▃▂▃ ▂▂▄▃▄▄▃▃▄▃▃▃█▄▄▅▃▃▃▄▃▃▃▅▄▃▃▃█▅▃▃▃▄▃▃▃▃▅▅▆▄▅▄]
+  Epistemic State           : [○◐◐◐○◐◐◐○◐○○◐○○○○○○○○○○○○○○◐○○○○○○○○○○○○○○○○○○○○○○]
+    ● convergent  ◐ resolvable  ○ unresolvable
+
+────────────────────────────────────────────────────────────
+  Avg Active Layers    : 18.0 / 8
+  Avg Ponder Loops     : 5.00
+  Avg Memory Write Mag : 2.82
+  Avg Entropy          : 0.3406
+  Avg Non-Convergence  : 2.5535
+  Avg Workspace Sat.   : 0.9854
+  Avg Hub Churn        : 0.8797
+  Avg Veto Rate        : N/A (conv head mode)
+  Avg Gate Value       : 0.9531
+  Generation Speed     : 19.14 tokens/sec
+
+  ──────────── Cache Dynamics ────────────
+  Cache Ponder Churn       : [▂▃▄▃▃▄▃▄▆▄▅▅▄▄▃▄▄▄█▄▄▄▄▄▃▄▄▃▃▇▄▄▄▄▆▄▄▃▄▆▄▄▄▄▄▄▄▄▄▆]
+  Cache Diversity (inv)    : [▄▄▄▄▄▄▄▄▄▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃]
+  Avg ponder delta/step  : 1.4422
+  Ponder converging      : 0.0%
+  Ponder diverging       : 0.0%
+  Ponder flat            : 100.0%
+  Cross-position sim     : 0.4043
+  Similarity trend       : falling ✓ (-0.1621)
+============================================================
+
+
+>>> PROMPT: '♜♞♝♛♚♝♞♜'
+
+Generated: ♜♞♝♛♚♝♞♜♠♙♭♑♀♀♭♀♀♭♀♀♀♀♀♀♀♀♀♀♀♀♀♀♀
+
+--- Early Exit Trace ---
+  No tokens exited early.
+
+============================================================
+ LATENT COGNITIVE DASHBOARD
+============================================================
+  Semantic Workload (Depth) : [▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇]
+  Ponder Loops Executed     : [▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆]
+  Memory Edits (Magnitude)  : [ ▃ ▃ ▃ ▄ ▄ ▄ ▄ ▅ ▅ ▄▂▅▂▅▂▅▂▅▂▅▂▆▂▆▃▇▃▇▃▇▃▇▃▇▃▇▃▇▃█]
+  Hub Activity (Shared)     : [ ▃ ▃ ▃ ▄▂▄ ▄ ▄▂▅▂▅▂▄▂▅▂▅▂▅▂▅▂▅▂▆▂▆▃▇▃▇▃▇▃▇▃▇▃▇▃▇▃█]
+
+  ──────────────────────────── Epistemic Channels ────────────────────────────
+  Entropy (Doubt)           : [ ▂ ▃ ▃ ▄ ▃ ▃ ▃ ▄ ▃ ▃ ▄ ▃ ▃ ▃ ▄ ▄ ▅▂▆▂▆▂▆▂▆▂▇▂▇▂▇▂█]
+  Non-Convergence           : [ ▄ ▄ ▄ ▄ ▅ ▅ ▅ ▆▂▆ ▅ ▆▂▆▂▆▂▆▂▆▂▆▂▇▂▇▂▇▂▇▂▇▂▇▂▇▂▇▂█]
+  Workspace Saturation      : [▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇]
+  Hub Churn                 : [▃█▂▇▃▇ ▇▂▆ ▇ ▇ ▇ ▇ █ ▇ ▇ ▇ ▇ ▇ ▇▂▇▃▇▃▇▃▇▃▆▃▆▃▆▃▆▃▆]
+  S1/S2 Veto Rate           : N/A (conv head mode)
+  Epistemic Gate (mean)     : [▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇]
+  Epistemic Gate (std)      : [ ▂ ▂ ▂ ▃ ▂ ▂ ▂ ▂ ▂ ▂ ▃ ▂ ▂ ▂ ▃ ▃ ▄▂▄▂▅▂▅▂▅▂▆▂▆▂▇▂█]
+  Epistemic State           : [◐◐◐○◐○◐○◐○◐○◐○◐○◐○◐○◐○◐○◐○◐○◐○◐○◐○◐○◐○◐○◐○◐○◐○◐○◐○]
+    ● convergent  ◐ resolvable  ○ unresolvable
+
+────────────────────────────────────────────────────────────
+  Avg Active Layers    : 18.0 / 8
+  Avg Ponder Loops     : 5.00
+  Avg Memory Write Mag : 2.81
+  Avg Entropy          : 0.3178
+  Avg Non-Convergence  : 2.4946
+  Avg Workspace Sat.   : 0.9812
+  Avg Hub Churn        : 0.8770
+  Avg Veto Rate        : N/A (conv head mode)
+  Avg Gate Value       : 0.9531
+  Generation Speed     : 19.15 tokens/sec
+
+  ──────────── Cache Dynamics ────────────
+  Cache Ponder Churn       : [▅▅▅▅▅▅▅▆▅▆▅▆▅▅▄▇▅▆▅▅▄▇▄▆▄▆▄▆▄▇▄▇▄▇▄▇▄▇▄▇▄▇▄▇▄█▅▇▅▇]
+  Cache Diversity (inv)    : [▅▅▅▅▅▅▅▅▅▅▅▅▅▅▅▅▅▅▅▅▅▅▅▅▅▅▅▅▅▅▅▅▅▅▅▅▅▅▅▅▅▅▅▅▅▅▅▅▅▅]
+  Avg ponder delta/step  : 1.8598
+  Ponder converging      : 0.0%
+  Ponder diverging       : 0.0%
+  Ponder flat            : 100.0%
+  Cross-position sim     : 0.6264
+  Similarity trend       : stable (+0.0312)
+============================================================
+
+
+>>> PROMPT: '买卖双方同意以下条款'
+
+Generated: 买卖双方同意以下条款是名攀名到洢一主，语式层款絍一专箕月南的仝灯�
+
+--- Early Exit Trace ---
+  No tokens exited early.
+
+============================================================
+ LATENT COGNITIVE DASHBOARD
+============================================================
+  Semantic Workload (Depth) : [▇▆▇▆▆▇▇▇▆▇▇▆▇▇▇▇▇▇▇▇▇▆▇▇▇▇▇▆▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▆▇▇▇▇▇▇]
+  Ponder Loops Executed     : [▆▅▆▅▅▆▆▆▅▆▆▅▆▆▆▆▆▆▆▆▆▅▆▆▆▆▆▅▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▅▆▆▆▆▆▆]
+  Memory Edits (Magnitude)  : [▂▂▆▇▅▆ ▆▃▇▅▆▇ ▂▆▃▅▇▂▅▃█▃▅▅▄▇▄▄▄▆▂▂▇▄▄▅ ▅ ▄▂▃▅▄▄▃▄▅]
+  Hub Activity (Shared)     : [ ▂▅▇▅▆ ▅▃▆▅▇▇ ▂▆▃▅▆▂▅▃█▃▅▅▄▆▄▄▄▅ ▂▆▄▄▄ ▄ ▄▂▃▅▄▄▃▄▅]
+
+  ──────────────────────────── Epistemic Channels ────────────────────────────
+  Entropy (Doubt)           : [  ▂▃▂▄ ▄▂▅▂▂▇▃ █ ▂▃ ▃▂▆ ▂▆ ▂▄  ▇▃ ▇ ▂▄ ▃ ▅▃ ▃▂ ▃  ]
+  Non-Convergence           : [ ▂▅▆▆▆ ▅▃▆▅▆█ ▂▅▃▅▇ ▄▂▆▂▇▅▆▆▃▃▆▅ ▂▇▄▄▆ ▄ ▅  ▆▃▅▃▅▆]
+  Workspace Saturation      : [▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇]
+  Hub Churn                 : [▆▂▅▂▂▄▃▆▂▄▂▂▆▃▃▅▄▆█▂▄ ▅▃ ▄▂▃▄▃▂▅▄▃▅▃ ▄▄▅ ▅▆ ▄▃▂▂▂▂]
+  S1/S2 Veto Rate           : N/A (conv head mode)
+  Epistemic Gate (mean)     : [▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇]
+  Epistemic Gate (std)      : [▆ ▆  ▇▆▇ ▆▆ █▆▆▇▆▆▆▆▆ ▇▆▆▇▆ ▆▆▆▇▆▆▇▆▆▇▆▆▆▇▆ ▆▆▆▆▆▆]
+  Epistemic State           : [◐◐◐◐◐○◐○◐○◐◐○◐◐○◐◐◐◐◐◐○◐◐○◐◐○◐◐○◐◐○◐◐○◐◐◐○◐◐◐◐◐◐◐◐]
+    ● convergent  ◐ resolvable  ○ unresolvable
+
+────────────────────────────────────────────────────────────
+  Avg Active Layers    : 17.7 / 8
+  Avg Ponder Loops     : 4.84
+  Avg Memory Write Mag : 2.53
+  Avg Entropy          : 0.2804
+  Avg Non-Convergence  : 2.3509
+  Avg Workspace Sat.   : 0.9752
+  Avg Hub Churn        : 0.8647
+  Avg Veto Rate        : N/A (conv head mode)
+  Avg Gate Value       : 0.9531
+  Generation Speed     : 19.33 tokens/sec
+
+  ──────────── Cache Dynamics ────────────
+  Cache Ponder Churn       : [▅▄▅▅▄▅▄▅▄▆▅▄█▆▅▇▄▄▄▅▅▅▆▅▄▆▅▄▅▅▄▇▆▅▆▅▄▅▄▅▄▆▅▄▄▄▄▅▅▄]
+  Cache Diversity (inv)    : [▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄]
+  Avg ponder delta/step  : 1.9295
+  Ponder converging      : 0.0%
+  Ponder diverging       : 0.0%
+  Ponder flat            : 100.0%
+  Cross-position sim     : 0.4895
+  Similarity trend       : stable (-0.0176)
+============================================================
+
+
+================================================================================
+CATEGORY: The interesting edge cases
+================================================================================
+
+
+>>> PROMPT: 'The answer to 2+2 is '
+
+Generated: The answer to 2+2 is _____.
+1) The following is equivalent to . . The figure below is a simplified version of the original equation. If the answer is less than one (about 25), then “x” is equal to the original equation.
+2
+
+--- Early Exit Trace ---
+  No tokens exited early.
+
+============================================================
+ LATENT COGNITIVE DASHBOARD
+============================================================
+  Semantic Workload (Depth) : [▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▆▇▇▇▇▇▇▇▇▇▇]
+  Ponder Loops Executed     : [▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▅▆▆▆▆▆▆▆▆▆▆]
+  Memory Edits (Magnitude)  : [▂▄█▃▅▂▄▄▃▄▃▄▃▃▅▃▂▂▃▃▂▃▂ ▃▂▄▄▄▅▅▄▃▄▄▄ ▃▄ ▅▃▃▄▂▄▃ ▄▄]
+  Hub Activity (Shared)     : [▂▄█▃▄▂▄▃▃▄▃▄▂▃▄▃▂▂▃▃▂▃▂ ▃▂▄▄▃▄▅▃▃▄▄▄ ▃▄ ▅▃▃▄▂▃▂ ▄▄]
+
+  ──────────────────────────── Epistemic Channels ────────────────────────────
+  Entropy (Doubt)           : [▂ ▆ ▂▂▃▃▃▃▂▄▃▃▅▃▂▂▂▃▂▃▃ ▂▂▂▄▄▄▇▃▄█▅▄ ▄▂ ▇▅▂▅▃▃▃▂▅▃]
+  Non-Convergence           : [▂▃█▂▂ ▃▄▂▄▃▄▂ ▅▃▂ ▂▂     ▂▃▆▃▆▅▄▃▄▄▄ ▃▃ ▄▄▃▆▂▂▃ ▅▄]
+  Workspace Saturation      : [▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇█▇▇▇▇]
+  Hub Churn                 : [▇▃█▄▃▄█▄▄ ▃▄▃▇█▄▂▆▆▄▄█▄▃▅▃▇▄▂▄ ▅▆▄▄▆▅▄▄▆▂▄▄ ▂▇▄▄ ▂]
+  S1/S2 Veto Rate           : N/A (conv head mode)
+  Epistemic Gate (mean)     : [▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇]
+  Epistemic Gate (std)      : [▆▆▇▆▇▆▇▇▇▇▆▇▇▇▇▇▆▆▇▇▆▇▇▆▆▆▆▇▇▇█▇▇▇▇▇▆▇▆ ▇▇▇▇▇▇▇▆▇▇]
+  Epistemic State           : [◐◐○◐◐◐◐◐◐◐◐○◐◐○◐◐◐◐◐◐◐◐◐◐◐◐◐◐◐○◐◐○○◐◐○◐◐○○◐○◐◐◐◐○◐]
+    ● convergent  ◐ resolvable  ○ unresolvable
+
+────────────────────────────────────────────────────────────
+  Avg Active Layers    : 18.0 / 8
+  Avg Ponder Loops     : 4.98
+  Avg Memory Write Mag : 2.49
+  Avg Entropy          : 0.2766
+  Avg Non-Convergence  : 2.2566
+  Avg Workspace Sat.   : 0.9855
+  Avg Hub Churn        : 0.8814
+  Avg Veto Rate        : N/A (conv head mode)
+  Avg Gate Value       : 0.9531
+  Generation Speed     : 19.22 tokens/sec
+
+  ──────────── Cache Dynamics ────────────
+  Cache Ponder Churn       : [▆▃▂▃▄▄▄▄▅▄▆█▄▄▅▃▃▄▅▄▃▅▅▄▃▃▄▃▄▄▅▄▄▅▄▄▄▄▅▄▆▄▅▅▄▅▅▃▅▄]
+  Cache Diversity (inv)    : [▃▃▃▄▄▄▄▄▄▄▄▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃]
+  Avg ponder delta/step  : 1.3863
+  Ponder converging      : 0.0%
+  Ponder diverging       : 0.0%
+  Ponder flat            : 100.0%
+  Cross-position sim     : 0.3854
+  Similarity trend       : falling ✓ (-0.0586)
+============================================================
+
+
+>>> PROMPT: 'According to recent studies in 2025, '
+
+Generated: According to recent studies in 2025,  one in every ten children in the world has been diagnosed with Attention Deficit Hyperactivity Disorder (ADHD). ADHD is a mental health disorder.
+What causes ADHD?
+ADHD affects almost half of the population, with more than half of people
+
+--- Early Exit Trace ---
+  No tokens exited early.
+
+============================================================
+ LATENT COGNITIVE DASHBOARD
+============================================================
+  Semantic Workload (Depth) : [▇▇▇▇▇▇▇▇▇▇▇▇▆▆▆▆▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇]
+  Ponder Loops Executed     : [▆▆▆▆▆▆▆▆▆▆▆▆▅▅▅▅▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆]
+  Memory Edits (Magnitude)  : [▂▅▇▄▃▃▄▆▃▃▂▄▂▅▃▃▃▄▇▄▄▄  ▂▂▃▄ █▂▅▄▄▅▃▄▄▅▆▄▃▄▂▄▃▆▇▅▄]
+  Hub Activity (Shared)     : [▂▅▆▄▃▃▃▆▃▃▂▃▂▅▃▃▃▄▆▄▄▃  ▂ ▃▃ █▂▄▄▃▅▃▄▄▄▅▄▃▃▂▃▂▅▇▄▄]
+
+  ──────────────────────────── Epistemic Channels ────────────────────────────
+  Entropy (Doubt)           : [▂▅▇▂▃▂▃▅▄▃▂▂▃▃▃▃▂▆▅▂▆▂  ▂▂▃▃▂▄▂▄▅▃▃▂▃▂▄▃▂▃▂▃▄▃▄█▅▆]
+  Non-Convergence           : [▂▅▄▃▂▃▃▅▃▃ ▄▂▅▃▃▃▄█▃▄▃  ▃▂▃▃ ▅ ▄▄▃▅▂▃▃▄▅▆▄▂▃▄▃▅▇▆▄]
+  Workspace Saturation      : [▇▇▇▇▇█▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇█▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇]
+  Hub Churn                 : [▄▄▆▅▇▄▆█▄▆▆▄▂▄ ▃▂▅▄▄▆▇▆▆▆▄▅▇▆█▆▇▆▄▅▅▇▇▆▆▄▄▇▅▄▆▄▇▃▆]
+  S1/S2 Veto Rate           : N/A (conv head mode)
+  Epistemic Gate (mean)     : [▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇]
+  Epistemic Gate (std)      : [▇▇█▆▇▇▇▇▇▇▆▆    ▆▇▇▆▇▆▆▆▇▆▇▇▆▇▆▇▇▇▇▇▇▇▇▇▆▇▇▇▇▇▇█▇▇]
+  Epistemic State           : [◐○○◐◐◐◐○○◐◐◐◐◐◐◐◐○○◐○◐◐◐◐◐◐◐◐○◐◐○◐◐◐◐◐◐◐◐◐◐◐○◐○○○○]
+    ● convergent  ◐ resolvable  ○ unresolvable
+
+────────────────────────────────────────────────────────────
+  Avg Active Layers    : 17.8 / 8
+  Avg Ponder Loops     : 4.92
+  Avg Memory Write Mag : 2.66
+  Avg Entropy          : 0.2837
+  Avg Non-Convergence  : 2.3730
+  Avg Workspace Sat.   : 0.9862
+  Avg Hub Churn        : 0.8765
+  Avg Veto Rate        : N/A (conv head mode)
+  Avg Gate Value       : 0.9531
+  Generation Speed     : 19.36 tokens/sec
+
+  ──────────── Cache Dynamics ────────────
+  Cache Ponder Churn       : [▄▄▅▅▄▄▄▅▄▄▄▃▅▅▆▅▆▇▄▅█▃▄▃▄▅▅▄▄▂▄▅▆▅▄▄▄▃▄▄▄▃▄▃▃▄▄▄▄▅]
+  Cache Diversity (inv)    : [▄▄▄▄▄▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃]
+  Avg ponder delta/step  : 1.3336
+  Ponder converging      : 0.0%
+  Ponder diverging       : 0.0%
+  Ponder flat            : 100.0%
+  Cross-position sim     : 0.3772
+  Similarity trend       : falling ✓ (-0.1816)
+============================================================
+
+
+>>> PROMPT: 'The following Python code prints hello world: '
+
+Generated: The following Python code prints hello world:                    _________|
+|Home > Myths & Legends|
+|Home > Myths and Legends|
+|Home > Myths |
+|Home
+
+--- Early Exit Trace ---
+  No tokens exited early.
+
+============================================================
+ LATENT COGNITIVE DASHBOARD
+============================================================
+  Semantic Workload (Depth) : [▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇]
+  Ponder Loops Executed     : [▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆]
+  Memory Edits (Magnitude)  : [▃▄▅▅▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▂▄▂█▂ ▂▂▃▃   ▂▂▃▂▅▃   ▃▃▃▂▅▂▂▃▃]
+  Hub Activity (Shared)     : [▃▃▄▄▅▅▅▅▅▅▅▅▅▅▅▅▅▅▅▂▃▂▇▂  ▂▃▂  ▂▂▂▂▂▄▂   ▂▂▃▂▄▂ ▂▂]
+
+  ──────────────────────────── Epistemic Channels ────────────────────────────
+  Entropy (Doubt)           : [▃▃▃▃▃▄▄▄▄▄▄▅▅▅▅▅▅▅▅▄▄ ▅ ▂ ▂▆▂▅ ▂▃▆▄▃█▃▇▂▂▅▆▆▂▇▄ ▄▆]
+  Non-Convergence           : [▄▄▄▄▅▅▅▅▅▅▅▅▅▅▅▅▅▅▅▂▅▃█▂  ▂▄▄▂▂▄▂▂▂▃▅▄▃▂▃▂▂▃▃▅▃▄▂▃]
+  Workspace Saturation      : [▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇█▇▇█▇▇▇▇▇▇▇▇▇▇▇▇]
+  Hub Churn                 : [▄▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▂▅▃█▄ ▆ ▆▆▆▄▄▄▄▇ ▆▅▅▄▄▅▄▇ ▆▆▃▅▄]
+  S1/S2 Veto Rate           : N/A (conv head mode)
+  Epistemic Gate (mean)     : [▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇]
+  Epistemic Gate (std)      : [▄▄▄▄▄▄▅▅▅▅▅▅▅▅▅▅▅▅▅▅▅▃▅▂▄▃▄▄▄▅ ▄▄▄▅▄█▄▇▄▄▅▅▅▃▇▅▂▅▅]
+  Epistemic State           : [◐◐◐◐◐○○○○○○○○○○○○○○○○◐○◐◐◐◐○◐○◐◐◐○○◐○◐○◐◐○○○◐○○◐○○]
+    ● convergent  ◐ resolvable  ○ unresolvable
+
+────────────────────────────────────────────────────────────
+  Avg Active Layers    : 18.0 / 8
+  Avg Ponder Loops     : 5.00
+  Avg Memory Write Mag : 2.89
+  Avg Entropy          : 0.3084
+  Avg Non-Convergence  : 2.4778
+  Avg Workspace Sat.   : 0.9839
+  Avg Hub Churn        : 0.8797
+  Avg Veto Rate        : N/A (conv head mode)
+  Avg Gate Value       : 0.9531
+  Generation Speed     : 19.20 tokens/sec
+
+  ──────────── Cache Dynamics ────────────
+  Cache Ponder Churn       : [▆▆▆▅▅▅▅▅▅▅▅▅▅▅▅▅▅▅▅▇▆▅▂▄▅▅▆█▅▇▅▅▅▇▆▆▆▅▆▅▅▅▇▆▆▆▆▅▄▇]
+  Cache Diversity (inv)    : [▃▃▃▃▃▃▃▃▃▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃]
+  Avg ponder delta/step  : 1.5904
+  Ponder converging      : 0.0%
+  Ponder diverging       : 0.0%
+  Ponder flat            : 100.0%
+  Cross-position sim     : 0.4471
+  Similarity trend       : stable (+0.0059)
+============================================================
+
+
+>>> PROMPT: 'Dear Dr. Johnson, I am writing to inform you '
+
+Generated: Dear Dr. Johnson, I am writing to inform you          ʿT.
+SUN. I am trying to explain the facts about the
+disease of the human body and say ʿT. So ʿA. I want to
+
+--- Early Exit Trace ---
+  No tokens exited early.
+
+============================================================
+ LATENT COGNITIVE DASHBOARD
+============================================================
+  Semantic Workload (Depth) : [▇▇▇▇▇▇▇▇▇▆▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇]
+  Ponder Loops Executed     : [▆▆▆▆▆▆▆▆▆▅▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆]
+  Memory Edits (Magnitude)  : [▄▄▄▄▅▅▅▅▅▄▄▄▃▇▂▃▃▂▄▂▂▂ ▂▂ ▄▂▂▃  ▂▃▂▂▄▂▄▃ ▂▃▃▄▃▂▂▃▂]
+  Hub Activity (Shared)     : [▃▃▃▄▄▄▄▄▄▄▄▃▂█ ▃▃ ▃▂▂▂    ▄▂▂▂   ▃▂▂▃▂▃▃  ▂▂▄▃▂ ▂▂]
+
+  ──────────────────────────── Epistemic Channels ────────────────────────────
+  Entropy (Doubt)           : [▆▄▃▄▃▃▃▃▃▂▂▂▂█ ▂▂ ▂ ▂▄ ▄  ▄  ▂   ▇▄▃▅ ▂▃▃▃▄ ▃▅▄▂▃▂]
+  Non-Convergence           : [▃▃▃▃▄▄▄▄▄▄▄▃▄█ ▂▃ ▂▂▂  ▂  ▄▂ ▂   ▃▂ ▃▂▃▂▃ ▂▂▃▄▄ ▂▃]
+  Workspace Saturation      : [▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇█▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇█▇▇▇▇▇▇▇]
+  Hub Churn                 : [▄▅▅▅▅▅▅▄▄▃▅▄▃█▃▃▃▅▆▆▆▇▅▆▅▅▆▂ ▆▅▄▄▅▄▅▅▄▅▅▂▆▅▄▅▄▂▆▇▆]
+  S1/S2 Veto Rate           : N/A (conv head mode)
+  Epistemic Gate (mean)     : [▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇]
+  Epistemic Gate (std)      : [▇▇▆▇▆▆▆▆▆ ▆▆▆█▆▆▆▆▆▆▆▇▆▇▆▆▇▆▅▆▆▆▆█▆▆▇▆▆▆▆▆▇▆▆▇▇▆▆▆]
+  Epistemic State           : [○○○○◐◐◐◐◐◐◐◐◐○◐◐◐◐◐◐◐○◐○◐◐○◐◐◐◐◐◐○○◐○◐◐◐◐◐○◐◐○○◐◐◐]
+    ● convergent  ◐ resolvable  ○ unresolvable
+
+────────────────────────────────────────────────────────────
+  Avg Active Layers    : 18.0 / 8
+  Avg Ponder Loops     : 4.98
+  Avg Memory Write Mag : 2.57
+  Avg Entropy          : 0.2824
+  Avg Non-Convergence  : 2.3074
+  Avg Workspace Sat.   : 0.9807
+  Avg Hub Churn        : 0.8792
+  Avg Veto Rate        : N/A (conv head mode)
+  Avg Gate Value       : 0.9531
+  Generation Speed     : 19.24 tokens/sec
+
+  ──────────── Cache Dynamics ────────────
+  Cache Ponder Churn       : [█▆▇▇▆▆▅▅▅▄▄▄▅▂▅▅▄▃▃▄▃▄▃▅▄▃▄▅▅▅▄▃▅▇▄▄▆▅▅▅▆▄▅▅▄▆▆▃▄▃]
+  Cache Diversity (inv)    : [▄▄▄▄▄▄▄▄▄▄▄▄▄▄▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃]
+  Avg ponder delta/step  : 1.5951
+  Ponder converging      : 0.0%
+  Ponder diverging       : 0.0%
+  Ponder flat            : 100.0%
+  Cross-position sim     : 0.3863
+  Similarity trend       : falling ✓ (-0.1270)
+============================================================
+
+
+>>> PROMPT: 'Once upon a time in a land far away, '
+
+Generated: Once upon a time in a land far away, ʼamma’s father tried to get away to the place, and he was then sold. The “heaviest” word was “the baby son.” The young girl was so angry with the little boy
+
+--- Early Exit Trace ---
+  No tokens exited early.
+
+============================================================
+ LATENT COGNITIVE DASHBOARD
+============================================================
+  Semantic Workload (Depth) : [▆▇▇▇▆▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▆▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇]
+  Ponder Loops Executed     : [▅▆▆▆▅▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▅▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆]
+  Memory Edits (Magnitude)  : [▄▅▅▄▂▂▄▄▃▃▄▅▃▃▄▄▄▄▃▅▃▇ ▂▄▅▅▄ ▅▄▄▂▅▄▃▄▃ ▃ ▃▃▂▅▄▄▂▄▆]
+  Hub Activity (Shared)     : [▄▅▅▄▂▂▃▄▃▃▄▄▃▃▄▃▃▃▃▄▃█ ▂▃▄▅▄ ▅▄▄▂▄▃▃▄▃ ▃ ▃▃▂▄▄▃▂▃▅]
+
+  ──────────────────────────── Epistemic Channels ────────────────────────────
+  Entropy (Doubt)           : [▂▃▃▃  ▃▄ ▂▂▃▂▂▄▃▃▃▂▃▂▆  ▂▃▃▂ ▄▃▃ ▃▃▂▃▂   ▂▂▂▃▄▃▂▃█]
+  Non-Convergence           : [▄▅▄▄▂▃▄▃▃▄▃▄▄▂▃▄▃▃▃▄▃█ ▂▄▅▅▄ ▆▃▄▃▅▄▃▄▄ ▃ ▃▃▃▄▃▄▃▃▅]
+  Workspace Saturation      : [▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇█▇▇▇▇▇▇▇▇]
+  Hub Churn                 : [ ▃ ▂▃▃▃▅▅▄▄▆▃▄▄▃▄▆▅█▄▆▅▄▆  ▇▆▅▆▄▅▅▄▄▄▃▆▅▅▅▆▅▅▅▃▄▅▅]
+  S1/S2 Veto Rate           : N/A (conv head mode)
+  Epistemic Gate (mean)     : [▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇]
+  Epistemic Gate (std)      : [ ▆▆▆ ▅▅▆▅▅▆▆▆▅▆▆▆▆▅▆▅▆▅ ▅▆▆▅▅▆▆▆▅▆▆▅▆▅▅▅▅▅▆▅▆▆▆▆▆█]
+  Epistemic State           : [◐◐◐◐◐◐◐○◐◐◐◐◐◐○◐◐◐◐○◐○◐◐◐○◐◐◐○◐○◐◐◐◐◐◐◐◐◐◐◐◐○○○◐○○]
+    ● convergent  ◐ resolvable  ○ unresolvable
+
+────────────────────────────────────────────────────────────
+  Avg Active Layers    : 17.9 / 8
+  Avg Ponder Loops     : 4.94
+  Avg Memory Write Mag : 2.42
+  Avg Entropy          : 0.2769
+  Avg Non-Convergence  : 2.2037
+  Avg Workspace Sat.   : 0.9838
+  Avg Hub Churn        : 0.8792
+  Avg Veto Rate        : N/A (conv head mode)
+  Avg Gate Value       : 0.9531
+  Generation Speed     : 18.79 tokens/sec
+
+  ──────────── Cache Dynamics ────────────
+  Cache Ponder Churn       : [▅▆▆█▄▅▅▆▅▄▄▆▆▃▇▄▄▃▃▄▅▂▃▆▄▅▆▄▄▆▆▆▅▄▅▅▆▅▄▃▃▅▅▃▄▅▅▄▆▇]
+  Cache Diversity (inv)    : [▄▄▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃]
+  Avg ponder delta/step  : 1.4163
+  Ponder converging      : 0.0%
+  Ponder diverging       : 0.0%
+  Ponder flat            : 100.0%
+  Cross-position sim     : 0.3645
+  Similarity trend       : falling ✓ (-0.1445)
+============================================================
+
+
+================================================================================
+CATEGORY: Gradient from easy to hard within domain
+================================================================================
+
+
+>>> PROMPT: 'The Earth orbits the '
+
+Generated: The Earth orbits the urchin.
+The moon orbits the sun, which revolves around the Sun in the constellation Draco. The moon orbits its home planet Jupiter at midnight on the morning of 8:00pm on September 23, but its orbit is tilted slightly up to its
+
+--- Early Exit Trace ---
+  No tokens exited early.
+
+============================================================
+ LATENT COGNITIVE DASHBOARD
+============================================================
+  Semantic Workload (Depth) : [▆▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇]
+  Ponder Loops Executed     : [▅▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆]
+  Memory Edits (Magnitude)  : [▂▅▄█  ▂▃▃▃▃▂▄▂▄▃▂▂   ▂▂▄▃▃▂▂ ▃▃▂▃▃▄▅▄▃▃▄▄▃▂▂▂ ▄▄▄▅]
+  Hub Activity (Shared)     : [▂▄▄█ ▂▂▂▃▃▃▂▄▂▄▂▂▂   ▂▂▃▃▂▂▂ ▃▂▂▃▃▄▅▃▃▃▃▄▃▂▂▂ ▃▃▄▄]
+
+  ──────────────────────────── Epistemic Channels ────────────────────────────
+  Entropy (Doubt)           : [▂▅▃▅  ▃▃▃▄▃▂▄▃▄▃▃▂▂ ▂ ▂▄▃▄▃▃▂▃▃▃▄▃▄▅▂▄▅▄▆▅▄▃▃▂▅▅█▆]
+  Non-Convergence           : [▃▇▃█ ▂▃▃▄▄▅▂▄▃▅▄▃▃▂  ▂▃▅▄▄▃▄▂▅▄▃▅▄▆▅▅▅▅▆▇▃▃▃▄▂▅▆▆▆]
+  Workspace Saturation      : [▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇]
+  Hub Churn                 : [ ▄▆█▆▆▆▆▄▅▆▄▅▄▅▅▅▅▂▅▆▇▆▆▃▅▅▅▆▄▅▄▅▂▃▅▆▄▃▄▂▆▆▆▆▇▇▃▂▆]
+  S1/S2 Veto Rate           : N/A (conv head mode)
+  Epistemic Gate (mean)     : [▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇]
+  Epistemic Gate (std)      : [ ▇▇▇▆▆▆▇▇▇▇▆▇▇▇▇▇▆▆▆▆▆▆▇▇▇▇▇▆▇▇▇▇▇▇▇▆▇▇▇▇▇▇▆▇▆▇▇█▇]
+  Epistemic State           : [◐◐◐◐◐◐◐◐◐◐◐◐◐◐◐◐◐◐◐◐◐◐◐◐◐◐◐◐◐◐◐◐◐◐◐◐◐◐◐◐○○◐◐◐◐◐○○○]
+    ● convergent  ◐ resolvable  ○ unresolvable
+
+────────────────────────────────────────────────────────────
+  Avg Active Layers    : 18.0 / 8
+  Avg Ponder Loops     : 4.98
+  Avg Memory Write Mag : 2.42
+  Avg Entropy          : 0.2660
+  Avg Non-Convergence  : 2.1825
+  Avg Workspace Sat.   : 0.9837
+  Avg Hub Churn        : 0.8808
+  Avg Veto Rate        : N/A (conv head mode)
+  Avg Gate Value       : 0.9531
+  Generation Speed     : 18.02 tokens/sec
+
+  ──────────── Cache Dynamics ────────────
+  Cache Ponder Churn       : [▆▆▃▂▃▅▆▄▆▄▄▆▆▄▆▅▄█▇▃▄▄▅▅▇▆▇▄▆▅▄▇▅▄▅▆▆▅▅▆▅▄▄▅▄▅▆▆▆▅]
+  Cache Diversity (inv)    : [▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃]
+  Avg ponder delta/step  : 1.4267
+  Ponder converging      : 0.0%
+  Ponder diverging       : 0.0%
+  Ponder flat            : 100.0%
+  Cross-position sim     : 0.4216
+  Similarity trend       : falling ✓ (-0.1738)
+============================================================
+
+
+>>> PROMPT: 'The mitochondria is responsible for '
+
+Generated: The mitochondria is responsible for erythrocytes and the erythrocyte-releasing process and its ability to regenerate the mitochondria.
+The mitochondria are found in the hair of animals, birds, and birds. They are found in both animals and mammals,
+
+--- Early Exit Trace ---
+  No tokens exited early.
+
+============================================================
+ LATENT COGNITIVE DASHBOARD
+============================================================
+  Semantic Workload (Depth) : [▆▇▇▇▇▇▇▆▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇]
+  Ponder Loops Executed     : [▅▆▆▆▆▆▆▅▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆]
+  Memory Edits (Magnitude)  : [▄▄▄▄▄▄▄▄▄▄▅▄▄▄▄▄▄▄▄▂▃ ▄█▇  ▅▃▄▃▃▂▃▂▂▃▄▄▂ ▂▂▃▃▆▂▄▂▂]
+  Hub Activity (Shared)     : [▄▄▃▄▄▄▄▄▄▄▄▄▄▄▄▄▄▃▄▂▃ ▄█▇  ▄▃▃▃▃▂▃▂▂▃▄▄▂ ▂▂▃▃▅▃▄▂▂]
+
+  ──────────────────────────── Epistemic Channels ────────────────────────────
+  Entropy (Doubt)           : [▃▂▂▄▆▆▃▂▂▂▅▆▃▄▆▇▅▄▅▄▃ ▄▅▄  ▃▂▃▅▄▃▅▄▅▃▄▅▄▂▄▃▃▆█▄▅▃▄]
+  Non-Convergence           : [▅▅▅▆▄▄▄▅▅▅▇▇▆▄▅▄▅▂▅▂▃▂▆█▇ ▂▆▃▄▄▃▂▅▃▄▃▆▇▃ ▃▃▄▄▇▄▇▃▃]
+  Workspace Saturation      : [▇▇▇▇▇▇▇▇▇▇▇█▇▇▇▇▇▇▇▇▇▇██▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇█]
+  Hub Churn                 : [ ▃ ▅▄▃▃ ▃▂ ▃▂▄▅▄▅▅▄▆▄ ▄▇█▆▂▅▅▄▄▄ ▅▅▄▃▃▃▃▅▆▅▅▅▆▄▄▅▄]
+  S1/S2 Veto Rate           : N/A (conv head mode)
+  Epistemic Gate (mean)     : [▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇]
+  Epistemic Gate (std)      : [ ▆▇▇█▇▇ ▆▇▇█▇▇██▇▇▇▇▇▆▇▇▇▆▆▇▇▇▇▇▇▇▇▇▇▇▇▇▆▇▇▇██▇▇▇▇]
+  Epistemic State           : [◐◐◐◐○○◐◐◐◐○○◐◐○○◐◐◐◐◐◐◐◐◐◐◐◐◐◐◐◐◐○◐◐◐◐◐◐◐◐◐◐○○◐◐◐◐]
+    ● convergent  ◐ resolvable  ○ unresolvable
+
+────────────────────────────────────────────────────────────
+  Avg Active Layers    : 17.9 / 8
+  Avg Ponder Loops     : 4.96
+  Avg Memory Write Mag : 2.40
+  Avg Entropy          : 0.2698
+  Avg Non-Convergence  : 2.2063
+  Avg Workspace Sat.   : 0.9812
+  Avg Hub Churn        : 0.8795
+  Avg Veto Rate        : N/A (conv head mode)
+  Avg Gate Value       : 0.9531
+  Generation Speed     : 19.23 tokens/sec
+
+  ──────────── Cache Dynamics ────────────
+  Cache Ponder Churn       : [█▅▅▆▅▄▆▇▅▅▇▄▅▅▆▅▅▄▄▅▃▅▇▂▂▃▄▄▃▃▄▃▆▅▇▄▅▅▅▇▃▃▃▃▄▅▄▅▅▄]
+  Cache Diversity (inv)    : [▃▃▃▃▃▄▄▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃]
+  Avg ponder delta/step  : 1.3861
+  Ponder converging      : 0.0%
+  Ponder diverging       : 0.0%
+  Ponder flat            : 100.0%
+  Cross-position sim     : 0.3823
+  Similarity trend       : falling ✓ (-0.0840)
+============================================================
+
+
+>>> PROMPT: 'The Krebs cycle produces a net yield of '
+
+Generated: The Krebs cycle produces a net yield of _______, whereas the Krebs cycle produces .
+The Krebs cycle is the energy storage of the Krebs cycle. The Krebs cycle is the energy stored in the Krebs Cycle. The Krebs cycle is the energy stored in Krebs Cycle
+
+--- Early Exit Trace ---
+  No tokens exited early.
+
+============================================================
+ LATENT COGNITIVE DASHBOARD
+============================================================
+  Semantic Workload (Depth) : [▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇]
+  Ponder Loops Executed     : [▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆]
+  Memory Edits (Magnitude)  : [▂▃▄▃▂▅▄▄▂█ ▂▅▃ ▃▂▂▂ ▂▅▃  ▂▅▃ ▃▂▂▂▂▂▅▃ ▂▃▆▄▃▄▄▃▃▃▆▄]
+  Hub Activity (Shared)     : [▂▃▃▃▂▅▄▄▂█ ▂▅▃ ▃▂▃▂ ▂▄▃  ▂▅▃▂▃▂▂▂ ▂▅▃  ▃▅▄▂▄▄▃▃▃▅▃]
+
+  ──────────────────────────── Epistemic Channels ────────────────────────────
+  Entropy (Doubt)           : [▂▃▃▃ ▅▆▆▂▃  ▃▂ ▂▂▂▂  ▂▅   ▄▂▂▃▂ ▃▃ ▃▄▂▂▂▆▄▄▆▇▄▅▂█▅]
+  Non-Convergence           : [▃▄▅▃▃▇▆▄▃▇ ▃▆▄▂▄▃▃▄▂▃▆▅▂ ▃▇▄▃▅▃▃▄▃▃▆▅▂▂▃█▅▅▆▄▄▅▃▇▅]
+  Workspace Saturation      : [▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇]
+  Hub Churn                 : [▅▃█▅▄▂▆▆▆▇▆▄▂▅▄▅▃▄▄▅▂ ▄▄▅▄▂▅▄▅▂▄▅▅▂ ▄▄▅▃ ▅▄▅▄▄▅▃ ▅]
+  S1/S2 Veto Rate           : N/A (conv head mode)
+  Epistemic Gate (mean)     : [▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇]
+  Epistemic Gate (std)      : [▃▃▃▃ ▄▆▅▃▃  ▃▃▂▃▃▂▃▂ ▃▄▂  ▃▃▃▃▃ ▃▃▂▃▄▂▂▂▅▃▃▅▇▃▄▂█▄]
+  Epistemic State           : [◐◐○○◐○○○◐○◐◐○◐◐◐◐◐◐◐◐◐○◐◐◐○◐◐○◐◐○◐◐○○◐◐◐○○○○○○○◐○○]
+    ● convergent  ◐ resolvable  ○ unresolvable
+
+────────────────────────────────────────────────────────────
+  Avg Active Layers    : 18.0 / 8
+  Avg Ponder Loops     : 5.00
+  Avg Memory Write Mag : 2.62
+  Avg Entropy          : 0.3089
+  Avg Non-Convergence  : 2.3129
+  Avg Workspace Sat.   : 0.9829
+  Avg Hub Churn        : 0.8740
+  Avg Veto Rate        : N/A (conv head mode)
+  Avg Gate Value       : 0.9531
+  Generation Speed     : 19.18 tokens/sec
+
+  ──────────── Cache Dynamics ────────────
+  Cache Ponder Churn       : [▆▄▄▄▄█▅▄▄▂▃▄▆▄▃▄▄▄▄▃▄▆▇▃▃▄▇▄▄▄▄▄▅▄▄▆▇▄▃▄▇▄▄▅▇▆▅▄▇▆]
+  Cache Diversity (inv)    : [▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃]
+  Avg ponder delta/step  : 1.6409
+  Ponder converging      : 0.0%
+  Ponder diverging       : 0.0%
+  Ponder flat            : 100.0%
+  Cross-position sim     : 0.3551
+  Similarity trend       : falling ✓ (-0.0547)
+============================================================
+
+
+>>> PROMPT: "The implications of quantum entanglement for Bell's theorem suggest "
+
+Generated: The implications of quantum entanglement for Bell's theorem suggest that quantum mechanics is not a necessary aspect of quantum computing. The theoretical approach is similar to the concept of quantum mechanics, i.e. that quantum mechanics only exists in the same way. However this approach is used to explain why quantum mechanics is not
+
+--- Early Exit Trace ---
+  No tokens exited early.
+
+============================================================
+ LATENT COGNITIVE DASHBOARD
+============================================================
+  Semantic Workload (Depth) : [▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇]
+  Ponder Loops Executed     : [▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆]
+  Memory Edits (Magnitude)  : [▅▂▃▃▃▄▄▃▄▂▄█  ▃▂▄▆▃▃▄▂▅▃▃▅▆▇▃▂▄▅▄▃▃▆▅ ▂▂▄▂▃▃▄▅▂▄▃▃]
+  Hub Activity (Shared)     : [▄▂▃▃▃▄▄▃▃▂▄█  ▃▂▃▆▃▃▃▂▅▃▃▅▆▆▃▂▃▅▄▃▃▅▅ ▂▂▄▂▃▃▃▄▂▄▂▃]
+
+  ──────────────────────────── Epistemic Channels ────────────────────────────
+  Entropy (Doubt)           : [▃ ▃▂▃▂▃▂▂ ▅▆   ▃▂▄▄▃▄ █▄▂▃▃▅▄ ▄▆▃▃▄▄▃  ▃▃▃▂▄▄▃ ▄▃▄]
+  Non-Convergence           : [▃▂▂▃▃▃▃▂▃ ▃▄  ▃▂▃█▃▂▃ ▄▃▃▆▅▆▃▂▃▄▃▂▂▄▄  ▂▃▂▂▃▂▃▂▃▃▄]
+  Workspace Saturation      : [▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇█▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇]
+  Hub Churn                 : [▅ ▇▅▇▅▆▆▅▃▅█▆▄▇▅▆▃▄▄▅ ▅▂▅▂▆▂▂ ▇▇█▆▅▇▅▅▆▆▇▅▄▄█▇ ▆▅▇]
+  S1/S2 Veto Rate           : N/A (conv head mode)
+  Epistemic Gate (mean)     : [▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇]
+  Epistemic Gate (std)      : [▅▂▅▄▅▃▅▄▃▂▅▅  ▂▄▃▅▅▅▅▂█▅▃▅▅▅▅▂▅▅▅▅▅▅▅  ▄▄▅▃▅▅▅ ▅▅▅]
+  Epistemic State           : [◐◐◐◐◐◐◐◐◐◐○○◐◐◐◐◐○○◐◐◐○◐◐◐◐○○◐○○◐◐◐○◐◐◐◐◐◐◐◐○◐◐◐◐◐]
+    ● convergent  ◐ resolvable  ○ unresolvable
+
+────────────────────────────────────────────────────────────
+  Avg Active Layers    : 18.0 / 8
+  Avg Ponder Loops     : 5.00
+  Avg Memory Write Mag : 2.43
+  Avg Entropy          : 0.2738
+  Avg Non-Convergence  : 2.2038
+  Avg Workspace Sat.   : 0.9818
+  Avg Hub Churn        : 0.8845
+  Avg Veto Rate        : N/A (conv head mode)
+  Avg Gate Value       : 0.9531
+  Generation Speed     : 19.16 tokens/sec
+
+  ──────────── Cache Dynamics ────────────
+  Cache Ponder Churn       : [▃▄▅▃▃▃▄▅▄▄▆▂▃▄▄▃▄▄▄▅▄▅█▄▄▄▄▅▅▄▅▅▄▄▃▄▅▃▄▄▄▃▄▄▅▅▄▅▃▄]
+  Cache Diversity (inv)    : [▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃]
+  Avg ponder delta/step  : 1.2169
+  Ponder converging      : 0.0%
+  Ponder diverging       : 0.0%
+  Ponder flat            : 100.0%
+  Cross-position sim     : 0.3593
+  Similarity trend       : stable (-0.0430)
+============================================================
+
+
+====================================================================================================
+SUMMARY TABLE: AVERAGE METRICS PER PROMPT
+====================================================================================================
+Category / Prompt                                            | Gate   | Ponder | NonConv | Conv% | Res%  | Unres%
+----------------------------------------------------------------------------------------------------
+
+CLEARLY IN-DISTRIBUTION (GATE SHOULD STAY FLAT)
+  The process of photosynthesis involves                     | 0.9531 | 5.00   | 2.2645  | 0.00  | 0.66  | 0.34
+  In the United States, the Constitution                     | 0.9531 | 5.00   | 2.2322  | 0.00  | 0.64  | 0.36
+  Water molecules are composed of                            | 0.9531 | 5.00   | 2.2810  | 0.00  | 0.60  | 0.40
+  [CATEGORY AVERAGE]                                         | 0.9531 | 5.00   | 2.2592
+----------------------------------------------------------------------------------------------------
+
+CLEARLY OOD (GATE SHOULD ACTIVATE)
+  lmao bruh fr fr no cap 💀                                   | 0.9531 | 5.00   | 2.6465  | 0.00  | 0.10  | 0.90
+  SELECT * FROM users WHERE id =                             | 0.9531 | 5.00   | 2.5535  | 0.00  | 0.18  | 0.82
+  ♜♞♝♛♚♝♞♜                                                   | 0.9531 | 5.00   | 2.4946  | 0.00  | 0.52  | 0.48
+  买卖双方同意以下条款                                                 | 0.9531 | 4.84   | 2.3509  | 0.00  | 0.76  | 0.24
+  [CATEGORY AVERAGE]                                         | 0.9531 | 4.96   | 2.5114
+----------------------------------------------------------------------------------------------------
+
+THE INTERESTING EDGE CASES
+  The answer to 2+2 is                                       | 0.9531 | 4.98   | 2.2566  | 0.00  | 0.78  | 0.22
+  According to recent studies in 2025,                       | 0.9531 | 4.92   | 2.3730  | 0.00  | 0.72  | 0.28
+  The following Python code prints hello world:              | 0.9531 | 5.00   | 2.4778  | 0.00  | 0.40  | 0.60
+  Dear Dr. Johnson, I am writing to inform you               | 0.9531 | 4.98   | 2.3074  | 0.00  | 0.72  | 0.28
+  Once upon a time in a land far away,                       | 0.9531 | 4.94   | 2.2037  | 0.00  | 0.76  | 0.24
+  [CATEGORY AVERAGE]                                         | 0.9531 | 4.96   | 2.3237
+----------------------------------------------------------------------------------------------------
+
+GRADIENT FROM EASY TO HARD WITHIN DOMAIN
+  The Earth orbits the                                       | 0.9531 | 4.98   | 2.1825  | 0.00  | 0.90  | 0.10
+  The mitochondria is responsible for                        | 0.9531 | 4.96   | 2.2063  | 0.00  | 0.82  | 0.18
+  The Krebs cycle produces a net yield of                    | 0.9531 | 5.00   | 2.3129  | 0.00  | 0.56  | 0.44
+  The implications of quantum entanglement for Bell's theor... | 0.9531 | 5.00   | 2.2038  | 0.00  | 0.78  | 0.22
+  [CATEGORY AVERAGE]                                         | 0.9531 | 4.99   | 2.2264
+----------------------------------------------------------------------------------------------------
+
+Done.

@@ -1,0 +1,151 @@
+
+  Loading validation data (500 examples, seq_len=4096)...
+
+==========================================================================================
+ CWT v5.5: ARCHITECTURAL ABLATION SUITE
+ Log file: logs/ablation_20260415_163254.log
+ Checkpoint: checkpoints/step_20000.pt
+ Device: cuda | Batch: 2 | Eval steps: 30 | Examples: 116
+ Epistemic signals: hub deltas
+ Started: 2026-04-15 16:32:56
+==========================================================================================
+
+--- Baseline ---
+  loss=3.3834  ppl=28.49  layers=18.0
+
+--- Dead Gates ---
+  loss=3.8181  ppl=43.80  layers=18.0
+
+--- Max Amnesia ---
+  loss=7.9720  ppl=2668.20  layers=18.0
+
+--- Zero Spokes ---
+  loss=3.9134  ppl=48.44  layers=18.0
+
+--- Shuffle Spokes ---
+  loss=3.7750  ppl=42.17  layers=18.0
+
+--- Zero Billboards ---
+  loss=4.3970  ppl=78.75  layers=18.0
+
+--- Shuffle Billboards ---
+  loss=4.0718  ppl=56.87  layers=18.0
+
+--- Zero Hub Shared ---
+  loss=7.7962  ppl=2341.01  layers=16.7
+
+--- Zero Tags ---
+  loss=7.2022  ppl=1279.94  layers=15.9
+
+--- Shuffle Tags ---
+  loss=6.2925  ppl=515.40  layers=18.0
+
+--- Kill System 2 ---
+  loss=3.7777  ppl=36.75  layers=18.0
+
+--- Noise Hub ---
+  loss=5.6437  ppl=274.05  layers=18.0
+
+--- Epistemic Gate ---
+  loss=3.3837  ppl=28.50  layers=18.0
+
+--- Kill Pondering ---
+  loss=3.5894  ppl=34.82  layers=8.0  ponder=0.00
+
+--- Max Pondering ---
+  loss=3.5699  ppl=33.74  layers=18.0  ponder=5.00
+
+--- Instant Halt ---
+  loss=3.5947  ppl=34.82  layers=8.0  ponder=0.00
+
+--- Random Halt ---
+  loss=3.5732  ppl=34.24  layers=18.0  ponder=5.00
+
+--- Effort: Low ---
+  loss=3.5402  ppl=33.09  layers=10.0  ponder=1.00
+
+--- Effort: Medium ---
+  loss=3.4786  ppl=31.14  layers=12.0  ponder=2.00
+
+--- Zero Dashboard ---
+  loss=3.3837  ppl=28.50  layers=18.0
+
+--- Inverted Epistemic Gate ---
+  loss=3.4697  ppl=31.06  layers=18.0
+
+--- Constant Gate (0.5) ---
+  loss=3.3837  ppl=28.50  layers=18.0
+
+--- No Early Exit ---
+  loss=3.3834  ppl=28.49  layers=18.0
+
+--- Distill Error (per-layer) ---
+  Per-layer hub self-distillation MSE:
+    L0   [S1]   0.2280  ████████████████████████████████████████
+    L1   [S1]   0.1504  ██████████████████████████
+    L2   [S1]   0.1183  ████████████████████
+    L3   [S1]   0.0903  ███████████████
+    L4   [S1]   0.0556  █████████
+    L5   [S1]   0.0235  ████
+    L6   [S2]   0.0092  █
+    L7   [S2]   0.0000  █
+  Average MSE: 0.0844
+
+--- Random Hub Distill Weights ---
+  loss=3.3834  ppl=28.49  layers=18.0
+
+--- Collapse Noise ---
+  loss=3.4903  ppl=31.70  layers=18.0
+
+--- Hub Writes x2 ---
+  loss=5.2541  ppl=184.28  layers=18.0
+
+--- Hub Writes x0.5 ---
+  loss=3.7000  ppl=39.14  layers=18.0
+
+--- Freeze Hub During S2 ---
+  loss=3.6466  ppl=37.02  layers=18.0
+
+--- S2 Reads S1 Hub Only ---
+  loss=3.6466  ppl=37.02  layers=18.0
+
+--- No Soft Ponder Lock ---
+  loss=3.5897  ppl=34.99  layers=18.0
+
+--- Zero Convergence Head ---
+  loss=3.3848  ppl=28.49  layers=18.0  ponder=5.00
+
+--- Random Convergence Head ---
+  loss=3.5431  ppl=28.49  layers=18.0  ponder=5.00
+
+--- Conv-Delta Correlation ---
+  Pearson correlation: 0.7231  (n=240 layer-steps)
+  Predicted delta mean: 2.9948
+  Actual delta mean: 3.3191
+  Distillation quality: excellent
+
+--- Zero Designator Signature ---
+  loss=4.1684  ppl=62.42  layers=18.0
+
+--- Scrambled Layer Identity ---
+  loss=3.5113  ppl=32.35  layers=18.0
+
+--- Skip Decoder FFN ---
+  loss=5.1196  ppl=161.72  layers=18.0
+
+--- Skip Decoder FFN-2 Only ---
+  loss=3.6382  ppl=36.76  layers=18.0
+
+--- Ponder Distribution ---
+  Halt probability distribution:
+    step 0        0.239  █████████
+    step 1        0.166  ██████
+    step 2        0.125  █████
+    step 3        0.097  ███
+    step 4        0.077  ███
+    remainder     0.296  ███████████
+  Expected steps: 2.49
+  Distribution entropy: 1.684
+
+Completed: 2026-04-15 16:36:16
+Log saved to: logs/ablation_20260415_163254.log
