@@ -1,0 +1,2276 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>CWT_Paper_v56_final</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&family=Lora:ital,wght@0,400;0,600;1,400&display=swap');
+
+    :root {
+      --bg-color: #0b0f19;
+      --bg-secondary: #0e1420;
+      --text-color: #e2e8f0;
+      --text-muted: #94a3b8;
+      --heading-color: #00e5ff;
+      --heading-glow: rgba(0, 229, 255, 0.25);
+      --link-color: #ff007f;
+      --link-hover: #ff4da6;
+      --link-glow: rgba(255, 0, 127, 0.4);
+      --accent-color: #ff7043;
+      --accent-glow: rgba(255, 112, 67, 0.3);
+      --surface-color: #131b2f;
+      --surface-hover: rgba(255, 255, 255, 0.025);
+      --border-color: #1e2d4a;
+      --border-highlight: #2a3b5c;
+      --code-color: #a78bfa;
+    }
+
+    /* ===== BASE ===== */
+    html {
+      color: var(--text-color);
+      background:
+        radial-gradient(ellipse at top left, rgba(0, 60, 120, 0.20) 0%, transparent 55%),
+        radial-gradient(ellipse at bottom right, rgba(120, 0, 80, 0.14) 0%, transparent 55%),
+        var(--bg-color);
+      background-attachment: fixed;
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      line-height: 1.75;
+      scroll-behavior: smooth;
+      min-height: 100%;
+      overflow-x: clip; /* prevents 100vw full-bleed creating page horiz scrollbar */
+    }
+    body {
+      margin: 0 auto;
+      max-width: 48em;
+      padding: 60px 40px;
+      hyphens: auto;
+      overflow-wrap: break-word;
+      text-rendering: optimizeLegibility;
+      font-kerning: normal;
+      background: transparent;
+    }
+    @media (max-width: 700px) {
+      body {
+        font-size: 0.95em;
+        padding: 30px 18px;
+      }
+      h1 { font-size: 2em; }
+    }
+    @media print {
+      html { background-color: white; }
+      body { background-color: transparent; color: black; font-size: 12pt; }
+      p, h2, h3 { orphans: 3; widows: 3; }
+      h2, h3, h4 { page-break-after: avoid; }
+    }
+
+    /* ===== TYPOGRAPHY ===== */
+    p { margin: 1.2em 0; }
+
+    h1, h2, h3, h4, h5, h6 {
+      font-family: 'Lora', Georgia, 'Times New Roman', serif;
+      color: var(--heading-color);
+      font-weight: 600;
+      letter-spacing: 0.01em;
+      line-height: 1.3;
+    }
+    h1 {
+      font-size: 2.6em;
+      margin-top: 0.5em;
+      margin-bottom: 0.5em;
+      text-shadow: 0 0 20px var(--heading-glow), 0 0 40px rgba(0, 229, 255, 0.1);
+      border-bottom: 2px solid var(--border-color);
+      padding-bottom: 0.4em;
+    }
+    h2 {
+      font-size: 1.75em;
+      margin-top: 2em;
+      color: #33eaff;
+      border-bottom: 1px solid var(--border-color);
+      padding-bottom: 0.2em;
+    }
+    h3 {
+      font-size: 1.35em;
+      margin-top: 1.6em;
+      color: #66efff;
+    }
+    h4 { font-size: 1.15em; margin-top: 1.4em; color: #99f3ff; }
+    h5, h6 { font-size: 1.05em; font-style: italic; color: #b3f6ff; }
+    h6 { font-weight: normal; }
+
+    /* ===== LINKS ===== */
+    a {
+      color: var(--link-color);
+      text-decoration: none;
+      border-bottom: 1px solid rgba(255, 0, 127, 0.3);
+      transition: color 0.2s ease, text-shadow 0.2s ease, border-color 0.2s ease;
+    }
+    a:hover {
+      color: var(--link-hover);
+      text-shadow: 0 0 10px var(--link-glow);
+      border-bottom-color: var(--link-hover);
+    }
+    a:visited { color: #cc0066; border-bottom-color: rgba(204, 0, 102, 0.3); }
+
+    /* ===== LISTS ===== */
+    ol, ul { padding-left: 1.7em; margin-top: 1em; }
+    li > ol, li > ul { margin-top: 0; }
+    li { margin-bottom: 0.4em; }
+
+    /* ===== IMAGES ===== */
+    img {
+      max-width: 100%;
+      border-radius: 8px;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.6), 0 0 0 1px var(--border-color);
+    }
+    svg { height: auto; max-width: 100%; }
+
+    /* ===== BLOCKQUOTE ===== */
+    blockquote {
+      margin: 1.5em 0;
+      padding: 1em 1.5em;
+      background-color: rgba(19, 27, 47, 0.8);
+      border-left: 4px solid var(--accent-color);
+      border-radius: 0 8px 8px 0;
+      color: #cbd5e1;
+      font-style: italic;
+      box-shadow: 0 2px 12px rgba(0, 0, 0, 0.3), inset 0 0 0 1px rgba(255, 112, 67, 0.1);
+    }
+    blockquote::before {
+      content: '';
+      display: block;
+      width: 100%;
+      height: 1px;
+      background: linear-gradient(90deg, var(--accent-color), transparent);
+      margin-bottom: 0.8em;
+      opacity: 0.4;
+    }
+
+    /* ===== CODE ===== */
+    code {
+      white-space: pre-wrap;
+      font-family: 'Fira Code', Consolas, Monaco, 'Courier New', monospace;
+      font-size: 0.875em;
+      background-color: rgba(19, 27, 47, 0.9);
+      color: var(--code-color);
+      padding: 0.2em 0.45em;
+      border-radius: 4px;
+      border: 1px solid var(--border-color);
+      hyphens: manual;
+    }
+    pre {
+      margin: 1.5em 0;
+      padding: 1.25em 1.5em;
+      background-color: var(--surface-color);
+      border-radius: 10px;
+      overflow: auto;
+      border: 1px solid var(--border-highlight);
+      box-shadow: inset 0 2px 8px rgba(0, 0, 0, 0.4), 0 4px 12px rgba(0, 0, 0, 0.3);
+    }
+    pre code {
+      padding: 0;
+      background-color: transparent;
+      border: none;
+      color: #e2e8f0;
+      overflow: visible;
+      overflow-wrap: normal;
+      font-size: 0.9em;
+    }
+    .sourceCode { background-color: transparent; overflow: visible; }
+
+    /* ===== HR ===== */
+    hr {
+      border: none;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, var(--border-highlight), transparent);
+      margin: 2.5em 0;
+    }
+
+    /* ===== TABLES ===== */
+    .table-wrapper {
+      overflow-x: auto;
+      width: 100%;
+      border-radius: 10px;
+      border: 1px solid var(--border-highlight);
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+      margin: 2em 0;
+      background-color: var(--surface-color);
+    }
+    table {
+      border-collapse: collapse;
+      width: 100%;
+      font-variant-numeric: lining-nums tabular-nums;
+      background-color: var(--surface-color);
+      font-size: 0.95em;
+      margin: 0;
+    }
+    table caption {
+      margin-bottom: 0.75em;
+      color: var(--text-muted);
+      font-style: italic;
+      font-size: 0.9em;
+    }
+    thead {
+      background: linear-gradient(135deg, rgba(0, 229, 255, 0.06), rgba(255, 0, 127, 0.04));
+    }
+    tbody {
+      border-top: 2px solid var(--border-highlight);
+    }
+    th {
+      color: var(--heading-color);
+      font-family: 'Inter', sans-serif;
+      font-weight: 600;
+      font-size: 0.875em;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      padding: 0.85em 1.1em;
+      border-bottom: 2px solid var(--border-highlight);
+    }
+    td {
+      padding: 0.75em 1.1em;
+      border-bottom: 1px solid var(--border-color);
+      color: var(--text-color);
+    }
+    tr:last-child td { border-bottom: none; }
+    tbody tr:hover td {
+      background-color: var(--surface-hover);
+      transition: background-color 0.15s ease;
+    }
+    strong {
+      color: #f1f5f9;
+      font-weight: 600;
+    }
+
+    /* ===== HEADER / TOC ===== */
+    header {
+      margin-bottom: 4em;
+      text-align: center;
+    }
+    #TOC {
+      background-color: var(--surface-color);
+      border: 1px solid var(--border-highlight);
+      border-radius: 10px;
+      padding: 1.5em 2em;
+      margin: 2em 0 3em;
+      box-shadow: 0 4px 16px rgba(0, 0, 0, 0.25);
+    }
+    #TOC li { list-style: none; margin-bottom: 0.3em; }
+    #TOC ul { padding-left: 1.3em; }
+    #TOC > ul { padding-left: 0; }
+    #TOC a {
+      color: var(--text-muted);
+      border-bottom: none;
+      font-size: 0.95em;
+    }
+    #TOC a:hover { color: var(--heading-color); text-shadow: 0 0 6px var(--heading-glow); }
+    #TOC a:not(:hover) { text-decoration: none; }
+
+    /* ===== MATH ===== */
+    .math { color: #c4b5fd; }
+
+    /* ===== MISC ===== */
+    span.smallcaps { font-variant: small-caps; }
+    div.columns { display: flex; gap: min(4vw, 1.5em); }
+    div.column { flex: auto; overflow-x: auto; }
+    div.hanging-indent { margin-left: 1.5em; text-indent: -1.5em; }
+    ul.task-list[class] { list-style: none; }
+    ul.task-list li input[type="checkbox"] {
+      font-size: inherit;
+      width: 0.8em;
+      margin: 0 0.8em 0.2em -1.6em;
+      vertical-align: middle;
+    }
+
+    /* ===== SELECTION ===== */
+    ::selection {
+      background-color: rgba(0, 229, 255, 0.2);
+      color: #ffffff;
+    }
+
+    /* ===== SCROLLBAR ===== */
+    ::-webkit-scrollbar { width: 8px; height: 8px; }
+    ::-webkit-scrollbar-track { background: var(--bg-color); }
+    ::-webkit-scrollbar-thumb {
+      background: var(--border-highlight);
+      border-radius: 4px;
+    }
+    ::-webkit-scrollbar-thumb:hover { background: #3a5278; }
+
+    /* ===== CITATIONS & REFERENCES ===== */
+    sup a.cite {
+      font-size: 0.78em;
+      font-family: 'Inter', sans-serif;
+      color: var(--heading-color);
+      text-decoration: none;
+      border-bottom: none;
+      opacity: 0.85;
+      font-weight: 500;
+      transition: opacity 0.15s, text-shadow 0.15s;
+    }
+    sup a.cite:hover {
+      opacity: 1;
+      text-shadow: 0 0 8px var(--heading-glow);
+      border-bottom: none;
+    }
+    #references {
+      margin-top: 3em;
+      padding-top: 1.5em;
+      border-top: 2px solid var(--border-highlight);
+    }
+    .references-list {
+      padding-left: 2.2em;
+      list-style: decimal;
+    }
+    .references-list li {
+      margin-bottom: 1em;
+      font-size: 0.92em;
+      line-height: 1.65;
+      color: var(--text-muted);
+      scroll-margin-top: 80px;
+    }
+    .references-list li:target {
+      background: rgba(0, 229, 255, 0.06);
+      border-radius: 6px;
+      padding: 0.3em 0.6em;
+      margin-left: -0.6em;
+      outline: 1px solid rgba(0, 229, 255, 0.2);
+    }
+    .references-list li em { color: #cbd5e1; }
+    .references-list li a {
+      color: var(--link-color);
+      word-break: break-all;
+    }
+
+    /* ===== AUTHOR BLOCK ===== */
+    .author-block {
+      text-align: center;
+      margin: 1.6em 0 2.5em;
+      padding: 1.2em 2em;
+      background: linear-gradient(135deg, rgba(0, 229, 255, 0.04), rgba(255, 0, 127, 0.04));
+      border: 1px solid var(--border-highlight);
+      border-radius: 10px;
+      box-shadow: 0 2px 12px rgba(0, 0, 0, 0.2);
+    }
+    .author-name {
+      font-family: 'Lora', Georgia, serif;
+      font-size: 1.25em;
+      font-weight: 600;
+      color: var(--heading-color);
+      letter-spacing: 0.04em;
+      display: block;
+      margin-bottom: 0.5em;
+    }
+    .author-links {
+      display: flex;
+      justify-content: center;
+      gap: 1.5em;
+      flex-wrap: wrap;
+      font-size: 0.9em;
+    }
+    .author-links a {
+      color: var(--text-muted);
+      border-bottom: 1px solid rgba(148, 163, 184, 0.25);
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4em;
+      transition: color 0.2s ease, text-shadow 0.2s ease;
+    }
+    .author-links a:hover {
+      color: var(--text-color);
+      border-bottom-color: var(--text-color);
+      text-shadow: none;
+    }
+    .author-links a svg {
+      width: 1em;
+      height: 1em;
+      fill: currentColor;
+      vertical-align: middle;
+    }
+    .author-affiliation {
+      margin-top: 0.6em;
+      font-size: 0.82em;
+      color: var(--text-muted);
+      font-style: italic;
+      letter-spacing: 0.02em;
+    }
+
+    /* ===== VISUALIZATIONS — full-bleed, breaks out of body max-width ===== */
+    .viz-section {
+      /* Full-bleed: expand to 100vw regardless of body max-width */
+      width: 100vw;
+      position: relative;
+      left: 50%;
+      transform: translateX(-50%);
+      padding: 1.5em 3vw;
+      box-sizing: border-box;
+      margin: 2.5em 0;
+    }
+    .viz-frame-wrapper {
+      border: 1px solid var(--border-highlight);
+      border-radius: 10px;
+      overflow: hidden;
+      background: var(--surface-color);
+      box-shadow: 0 4px 24px rgba(0, 0, 0, 0.5);
+      margin: 1.2em 0 0.3em;
+      width: 100%;
+    }
+    /* Standalone (non-grid) charts: center and cap width */
+    .viz-section > .viz-frame-wrapper {
+      max-width: 1400px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+    .viz-frame-wrapper iframe {
+      width: 100%;
+      display: block;
+      border: none;
+    }
+    .viz-caption {
+      font-size: 0.82em;
+      font-family: 'Inter', sans-serif;
+      color: var(--text-muted);
+      font-style: italic;
+      text-align: center;
+      margin: 0.3em 0 1.5em;
+      letter-spacing: 0.02em;
+    }
+    .viz-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1.2em;
+      margin: 1.5em 0;
+    }
+    @media (max-width: 1100px) {
+      .viz-grid { grid-template-columns: 1fr 1fr; }
+    }
+    .viz-grid-item .viz-frame-wrapper { margin-top: 0; }
+    @media (max-width: 700px) {
+      .viz-grid { grid-template-columns: 1fr; }
+    }
+  </style>
+  <script defer=""
+  src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js"
+  type="text/javascript"></script>
+</head>
+<body>
+<h1
+id="the-cognitive-workspace-transformer-structured-state-management-for-compute-efficient-language-modeling">The
+Cognitive Workspace Transformer: Structured State Management for
+Compute-Efficient Language Modeling</h1>
+
+<div class="author-block">
+  <span class="author-name">GVP</span>
+  <div class="author-links">
+    <a href="https://github.com/Steel-skull" target="_blank" rel="noopener noreferrer">
+      <!-- GitHub icon -->
+      <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"/></svg>
+      Steel-skull
+    </a>
+    <a href="https://discord.com/users/steelcortex" target="_blank" rel="noopener noreferrer">
+      <!-- Discord icon -->
+      <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M20.317 4.37a19.791 19.791 0 0 0-4.885-1.515.074.074 0 0 0-.079.037c-.21.375-.444.864-.608 1.25a18.27 18.27 0 0 0-5.487 0 12.64 12.64 0 0 0-.617-1.25.077.077 0 0 0-.079-.037A19.736 19.736 0 0 0 3.677 4.37a.07.07 0 0 0-.032.027C.533 9.046-.32 13.58.099 18.057a.082.082 0 0 0 .031.057 19.9 19.9 0 0 0 5.993 3.03.078.078 0 0 0 .084-.028 14.09 14.09 0 0 0 1.226-1.994.076.076 0 0 0-.041-.106 13.107 13.107 0 0 1-1.872-.892.077.077 0 0 1-.008-.128 10.2 10.2 0 0 0 .372-.292.074.074 0 0 1 .077-.01c3.928 1.793 8.18 1.793 12.062 0a.074.074 0 0 1 .078.01c.12.098.246.198.373.292a.077.077 0 0 1-.006.127 12.299 12.299 0 0 1-1.873.892.077.077 0 0 0-.041.107c.36.698.772 1.362 1.225 1.993a.076.076 0 0 0 .084.028 19.839 19.839 0 0 0 6.002-3.03.077.077 0 0 0 .032-.054c.5-5.177-.838-9.674-3.549-13.66a.061.061 0 0 0-.031-.03zM8.02 15.33c-1.183 0-2.157-1.085-2.157-2.419 0-1.333.956-2.419 2.157-2.419 1.21 0 2.176 1.096 2.157 2.42 0 1.333-.956 2.418-2.157 2.418zm7.975 0c-1.183 0-2.157-1.085-2.157-2.419 0-1.333.955-2.419 2.157-2.419 1.21 0 2.176 1.096 2.157 2.42 0 1.333-.946 2.418-2.157 2.418z"/></svg>
+      steelcortex
+    </a>
+  </div>
+  <p class="author-affiliation">Independent Research · 2026</p>
+</div>
+
+<h2 id="abstract">Abstract</h2>
+<p>We introduce the Cognitive Workspace Transformer (CWT), a neural
+architecture that replaces the standard transformer’s residual stream
+with a structured hub-and-spoke workspace featuring content-addressed
+decay gates, dual-system processing, and PonderNet-style adaptive
+compute. We train CWT at 57.8M parameters and evaluate it against two
+controlled baselines: a parameter-matched 8-layer standard transformer
+(57.9M) and a compute-matched 13-layer standard transformer (67.5M), all
+trained on identical data (FineWeb-Edu, 5.2B tokens) with identical
+hyperparameters. CWT achieves PPL 29.54 — beating the parameter-matched
+baseline (30.67, a 3.7% improvement) despite allocating only 22.9M
+parameters to core attention and FFN computation. Against the 13-layer
+baseline (PPL 29.04), which devotes 41.7M to attention and FFN, CWT
+comes within 1.7% in quality with 45% less core compute capacity,
+demonstrating that the workspace infrastructure makes each compute
+parameter substantially more effective. Comprehensive ablation analysis
+across 30+ interventions confirms that workspace structural components
+(hub, tags, decay gates) are load-bearing, with the hub shared region
+alone causing +8,114% degradation when zeroed. The architecture
+additionally provides smooth inference-time compute/quality tradeoffs,
+honest epistemic self-monitoring through hub delta dynamics, and robust
+long-context extrapolation up to 2× training length with under 10%
+degradation.</p>
+<h2 id="introduction">1. Introduction</h2>
+<p>Standard transformers <sup><a href="#ref-23" class="cite">[23]</a></sup> encode all information — content, positional
+context, routing signals, and layer-to-layer communication — into a
+single undifferentiated residual stream. Each layer reads and writes to
+this shared vector without structural guidance about what information
+belongs where, who wrote it, or whether it should persist. As models
+scale, an increasing fraction of parameters is spent on implicit routing
+and demultiplexing rather than useful computation.</p>
+<p>We propose the Cognitive Workspace Transformer, which replaces the
+residual stream with a structured workspace organized into distinct
+memory regions: private per-layer spokes, permanent broadcast
+billboards, a decay-managed shared hub, and identity tags that drive
+content-addressed forgetting. This organization provides several
+advantages that compound with scale:</p>
+<p><strong>Structural addressing</strong> eliminates the need for layers
+to learn routing from scratch, freeing parameters for semantic
+computation. Our controlled baseline comparisons show that CWT matches a
+standard transformer that has 45% more core compute capacity (41.7M vs
+22.9M in attention+FFN), demonstrating that the workspace infrastructure
+is not merely overhead but an active force multiplier on the parameters
+that remain.</p>
+<p><strong>Content-addressed decay gates</strong> enable selective
+forgetting based on who wrote what. Ablation shows hub write sensitivity
+increases from +76% to +547% degradation between steps 8K and 20K,
+revealing that the hub develops precise calibration over training — each
+dimension comes to carry specific information at carefully tuned
+magnitudes.</p>
+<p><strong>Dual-system processing</strong> with adaptive compute allows
+the model to allocate different amounts of deliberation to tokens of
+varying difficulty, providing a smooth compute/quality tradeoff at
+inference time that standard transformers cannot offer.</p>
+<p><strong>Hub-derived epistemic signals</strong> provide honest
+uncertainty estimation without auxiliary classifiers, derived directly
+from the dynamics of hub state evolution across layers.</p>
+<p>CWT draws inspiration from Global Workspace Theory in cognitive
+science (Baars, 1988 <sup><a href="#ref-3" class="cite">[3]</a></sup>), where a shared broadcast medium enables
+specialized processors to communicate and coordinate. The hub serves as
+this global workspace — all layers can read from it, but writes are
+mediated by decay gates that evaluate the relevance and freshness of
+existing content before allowing updates.</p>
+<h2 id="architecture">2. Architecture</h2>
+<h3 id="workspace-structure">2.1 Workspace Structure</h3>
+<p>The workspace state tensor <span class="math inline">\(S \in
+\mathbb{R}^{B \times T \times d_s}\)</span> replaces the residual
+stream. It is partitioned into four semantically distinct regions:</p>
+<p><strong>Spokes</strong> (<span class="math inline">\(d_{\text{spoke}}
+= 48\)</span> per layer): Private scratch memory for each layer. A layer
+can read and write its own spoke but cannot access other layers’ spokes.
+This provides guaranteed private computation space that cannot be
+corrupted by other layers’ writes.</p>
+<p><strong>Hub Private / Billboards</strong> (<span
+class="math inline">\(d_{\text{hub\_priv}} = 16\)</span> per layer):
+Permanent broadcast channels. Each layer writes to its billboard; all
+subsequent layers can read from all billboards. Unlike the hub shared
+region, billboards are never decayed — they serve as persistent signals
+about what each layer discovered.</p>
+<p><strong>Hub Shared</strong> (<span
+class="math inline">\(d_{\text{hub\_shared}} = 256\)</span>): The
+central communication channel. All layers read from and write to this
+shared region, mediated by tag-addressed decay gates. This is the
+primary information pathway and the region where most semantic content
+resides. At 256 dimensions, it carries half the bandwidth of the
+baseline’s 512-dimensional residual stream, yet ablation shows it is the
+most critical component (+8,114% degradation when zeroed).</p>
+<p><strong>Tags</strong> (<span class="math inline">\(d_{\text{tag}} =
+16\)</span> per layer): Identity markers embedded in the workspace that
+identify which layer wrote which content. Decay gates read tags to make
+content-addressed forgetting decisions — suppressing stale information
+from earlier layers when it is no longer relevant.</p>
+<p>The total workspace dimension is <span class="math inline">\(d_s =
+n_{\text{layers}} \times (d_{\text{spoke}} + d_{\text{hub\_priv}} +
+d_{\text{tag}}) + d_{\text{hub\_shared}}\)</span>. For our 8-layer
+configuration: <span class="math inline">\(d_s = 8 \times (48 + 16 + 16)
++ 256 = 896\)</span>.</p>
+<h3 id="tag-addressed-decay-gates">2.2 Tag-Addressed Decay Gates</h3>
+<p>Each layer’s write to hub shared is gated by a decay mechanism that
+examines existing tags to decide what to suppress:</p>
+<p><span class="math display">\[g_n = \sigma(W_g \cdot [\text{query}(H);
+\text{mean\_tag}] + b_n)\]</span></p>
+<p>where <span class="math inline">\(b_n\)</span> is a per-system bias
+(3.0 for S1, 5.0 for S2) that provides a “soft ponder lock” — S1 layers
+default to moderate retention while S2 layers default to strong
+retention, ensuring that S2’s refinements are not easily overwritten.
+The query is derived from the layer’s hidden state projected to tag
+dimension, and the mean tag is averaged over a sliding window of recent
+layers’ tags.</p>
+<p>The gate values are applied through a custom FlooredMultiply
+operation with straight-through gradient estimation:</p>
+<p><span class="math display">\[\text{hub\_new} =
+\text{FlooredMultiply}(\text{hub\_old}, g_n, \text{floor}) +
+\Delta_n\]</span></p>
+<p>The gradient floor (0.5 for S1, 0.85 for S2) ensures that gradients
+always flow through all layers regardless of gate values, preventing
+dead gradient paths. The forward pass applies the true gate value; the
+backward pass clamps it to the floor, providing a form of
+straight-through estimation that preserves gradient magnitude.</p>
+<h3 id="dual-system-processing">2.3 Dual-System Processing</h3>
+<p>CWT organizes its layers into two systems inspired by dual-process
+theory:</p>
+<p><strong>System 1 (S1)</strong>: Layers 0–5 (6 unique weight
+matrices). These process every token exactly once, building the initial
+representation. S1 layers have lower decay gate bias (3.0), allowing
+more aggressive information turnover as the representation is
+constructed.</p>
+<p><strong>System 2 (S2)</strong>: Layers 6–7 (2 unique weight
+matrices). These are reused during pondering, with each iteration seeing
+the updated hub content from the previous pass. S2 layers have higher
+decay gate bias (5.0 = base 3.0 + 2.0 S2 offset), producing a "soft
+ponder lock" — S1 layers default to moderate retention while S2 layers
+default to strong retention, ensuring that S2's refinements are not
+easily overwritten. This coupling means the S2 bias tracks the S1 base
+bias if tuned at different scales. The characteristic reconsider/commit
+oscillation pattern has S2-L0 making larger hub modifications and S2-L1
+making smaller refinements.</p>
+<p>An S1 exit loss (<span class="math inline">\(\lambda_{\text{s1}} =
+0.1\)</span>, Phase 2 only) trains S1 to produce standalone-quality
+predictions by running the collapse and decoder on the workspace state
+at the S1/S2 boundary. This enables a no-ponder deployment mode (PPL
+36.33) that uses only 8 layer passes.</p>
+<h3 id="adaptive-compute-via-pondernet">2.4 Adaptive Compute via
+PonderNet</h3>
+<p>After S1 processing, S2 layers are applied iteratively with
+PonderNet-style halting. A learned halt head examines hub content and
+produces a per-token halting probability at each step:</p>
+<p><span class="math display">\[p_{\text{halt}}^{(t)} = \sigma(W_{h2} \cdot
+\text{ReLU}(W_{h1} \cdot \text{hub}^{(t)}))\]</span></p>
+<p>The final output is a weighted combination across all ponder
+steps:</p>
+<p><span class="math display">\[S_{\text{out}} = \sum_{t=0}^{T_{\max}}
+w_t \cdot S^{(t)}, \quad w_t = p_{\text{halt}}^{(t)} \cdot
+\prod_{i&lt;t}(1 - p_{\text{halt}}^{(i)})\]</span></p>
+<p>with a geometric prior regularization loss that encourages the model
+to use fewer steps when possible:</p>
+<p><span class="math display">\[\mathcal{L}_{\text{ponder}} =
+\text{KL}(q_{\text{halt}} \| \text{Geometric}(\lambda_p))\]</span></p>
+<p>At convergence (step 20K), the halt distribution settles at: step 0 =
+23.9%, step 1 = 16.6%, step 2 = 12.5%, step 3 = 9.7%, step 4 = 7.7%,
+remainder = 29.6%, giving an expected depth of 2.49 S2 iterations. A
+blind halt ablation confirmed that KL divergence and entropy inputs to
+the halt head contributed only +0.3% over hub-content-only input, so the
+halt head uses hub content exclusively.</p>
+<h3 id="cwt-mla-hub-derived-latent-attention">2.5 CWT-MLA: Hub-Derived
+Latent Attention</h3>
+<p>CWT uses Multi-head Latent Attention (MLA) with an architectural
+privacy constraint: queries are computed from the full readable
+workspace (spoke + hub + tags), but keys and values are derived only
+from the hub content:</p>
+<p><span class="math display">\[Q = W_Q \cdot
+\text{read\_project}(S_{\text{readable}}), \quad c_{\text{KV}} =
+W_{\text{down}} \cdot \text{norm}(S_{\text{hub}})\]</span> <span
+class="math display">\[[K; V] = W_{\text{up}} \cdot
+c_{\text{KV}}\]</span></p>
+<p>where <span class="math inline">\(c_{\text{KV}} \in
+\mathbb{R}^{d_{\text{kv\_latent}}}\)</span> is a compressed latent
+representation with <span class="math inline">\(d_{\text{kv\_latent}} =
+128\)</span>. This provides 8× KV cache compression compared to standard
+multi-head attention while architecturally enforcing spoke privacy — a
+layer’s queries can attend based on private scratch state, but the
+information retrieved is always from the shared hub.</p>
+<h3 id="hub-self-distillation">2.6 Hub Self-Distillation</h3>
+<p>Hub self-distillation replaces the expensive vocabulary-projection
+probes used in earlier versions (v5.4). Each layer's hub output is
+supervised via mean squared error against the final hub state through a
+lightweight bottleneck:</p>
+<p><span class="math display">\[\mathcal{L}_{\text{distill}} =
+\frac{1}{|P|} \sum_{n \in P} \| f_{\theta}(\text{hub}_n) -
+\text{hub}_{\text{final}} \|^2\]</span></p>
+<p>where <span class="math inline">\(f_\theta\)</span> is a two-layer
+MLP (hub → 128 → hub) and <span class="math inline">\(P\)</span> is a
+stratified set of probed layers (the last 5 layers plus 1 random layer).
+The final hub state is detached — gradients flow only through
+intermediate layers, encouraging each layer to progressively approximate
+the final state.</p>
+<p>This provides deep supervision at 250× lower cost than the
+probe-based approach. The earlier probes required a vocabulary-sized
+matmul (<span class="math inline">\(512 \times 50{,}257 \approx
+25\)</span>M elements) per probed layer, accounting for a 4.5×
+throughput difference between v5.4 (6.5K tok/s) and v5.6 (29K tok/s in
+Phase 1).</p>
+<p>At convergence, distillation error decreases monotonically across
+layers (L0: 0.228, L1: 0.150, L2: 0.118, L3: 0.090, L4: 0.056, L5:
+0.024, L6: 0.009, L7: 0.000), confirming that each layer progressively
+refines the hub toward its final state.</p>
+<h3 id="output-path">2.7 Output Path</h3>
+<p>The workspace is collapsed to <span
+class="math inline">\(d_{\text{model}}\)</span> via a learned projection
+over the spokes and hub regions (excluding tags), normalized, then
+passed through a two-layer SwiGLU <sup><a href="#ref-20" class="cite">[20]</a></sup> FFN stack before the tied language
+model head:</p>
+<p><span class="math display">\[\text{collapsed} = W_{\text{collapse}}
+\cdot \text{RMSNorm}([\text{spokes}; \text{hub}])\]</span> <span
+class="math display">\[x_0 = \text{RMSNorm}(\text{collapsed} \cdot
+g_{\text{epistemic}})\]</span> <span
+class="math display">\[x_1 = \text{RMSNorm}_1(x_0 + \text{FFN}_1(x_0))\]</span> <span
+class="math display">\[x_2 = \text{RMSNorm}_2(x_1 + \text{FFN}_2(x_1))\]</span> <span
+class="math display">\[\text{logits} = W_{\text{lm\_head}} \cdot x_2\]</span></p>
+<p>where <span class="math inline">\(g_{\text{epistemic}}\)</span> is a
+learned multiplicative gate conditioned on hub delta dynamics and ponder
+workload. The lm_head weights are tied with the input embedding. We note
+in Section 9 that this decoder design is a candidate for simplification
+— the two FFN layers consume ~4.3M parameters without access to
+attention or the workspace, making them the least efficient parameters
+in the model.</p>
+<h2 id="training">3. Training</h2>
+<h3 id="configuration">3.1 Configuration</h3>
+<table>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Total parameters</td>
+<td>57.8M (weight-tied)</td>
+</tr>
+<tr>
+<td>Core compute (attn + FFN)</td>
+<td>22.9M</td>
+</tr>
+<tr>
+<td>Workspace overhead</td>
+<td>~9.2M</td>
+</tr>
+<tr>
+<td>d_model</td>
+<td>512</td>
+</tr>
+<tr>
+<td>d_s (workspace)</td>
+<td>896</td>
+</tr>
+<tr>
+<td>Layers</td>
+<td>8 (6 S1 + 2 S2)</td>
+</tr>
+<tr>
+<td>Attention heads</td>
+<td>8</td>
+</tr>
+<tr>
+<td>FFN dimension</td>
+<td>1408</td>
+</tr>
+<tr>
+<td>KV latent dimension</td>
+<td>128</td>
+</tr>
+<tr>
+<td>Max ponder steps</td>
+<td>5</td>
+</tr>
+<tr>
+<td>Sequence length</td>
+<td>4,096</td>
+</tr>
+<tr>
+<td>Vocabulary</td>
+<td>50,257 (GPT-2 <sup><a href="#ref-19" class="cite">[19]</a></sup>)</td>
+</tr>
+</tbody>
+</table>
+<h3 id="dataset-and-optimization">3.2 Dataset and Optimization</h3>
+<p>We train on FineWeb-Edu (sample-10BT) <sup><a href="#ref-18" class="cite">[18]</a></sup>, a curated educational web
+corpus. Training uses 4× NVIDIA RTX 3090 GPUs with DDP, AdamW optimizer <sup><a href="#ref-15" class="cite">[15]</a></sup>
+(<span class="math inline">\(\beta_1 = 0.9\)</span>, <span
+class="math inline">\(\beta_2 = 0.95\)</span>), peak learning rate <span
+class="math inline">\(3 \times 10^{-4}\)</span> with cosine decay to
+<span class="math inline">\(10^{-5}\)</span>, 1,000-step warmup, and
+gradient clipping at 1.0. Effective batch size is 96 sequences (batch
+size 3 × 8 gradient accumulation steps × 4 GPUs). The training corpus
+contains approximately 5.2 billion tokens; over 20,000 optimizer steps
+the model processes approximately 7.9 billion tokens (~1.5 epochs).</p>
+<h3 id="two-phase-training">3.3 Two-Phase Training</h3>
+<p><strong>Phase 1 (steps 0–2,000):</strong> S1 layers only. Pondering
+is disabled; all tokens receive exactly 8 layer passes. Hub
+self-distillation loss ramps from 0 to full over the first 500 steps.
+This establishes stable workspace dynamics before introducing adaptive
+compute. Phase 1 throughput: ~29,000 tokens/second.</p>
+<p><strong>Phase 2 (steps 2,000–20,000):</strong> Full adaptive
+pondering enabled. S2 layers iterate up to 5 times with learned halting.
+The ponder loss ramps in over 1,500 steps (steps 2,000–3,500). The S1
+exit loss activates (<span
+class="math inline">\(\lambda_{\text{s1\_exit}} = 0.1\)</span>),
+training S1 to produce standalone-quality predictions. Phase 2
+throughput: ~16,000 tokens/second.</p>
+<h3 id="loss-function">3.4 Loss Function</h3>
+<p>The total loss is a weighted combination:</p>
+<p><span class="math display">\[\mathcal{L} = \mathcal{L}_{\text{LM}} +
+\lambda_{\text{depth}} \mathcal{L}_{\text{depth}} +
+\lambda_{\text{distill}} \mathcal{L}_{\text{distill}} +
+\lambda_{\text{ponder}} \mathcal{L}_{\text{ponder}} +
+\lambda_{\text{conv}} \mathcal{L}_{\text{conv}} + \lambda_{\text{s1}}
+\mathcal{L}_{\text{s1\_exit}}\]</span></p>
+<p>where <span class="math inline">\(\lambda_{\text{depth}} =
+0.01\)</span>, <span class="math inline">\(\lambda_{\text{distill}} =
+0.1\)</span>, <span class="math inline">\(\lambda_{\text{ponder}} =
+0.01\)</span>, <span class="math inline">\(\lambda_{\text{conv}} =
+0.001\)</span>, and <span class="math inline">\(\lambda_{\text{s1}} =
+0.1\)</span> (Phase 2 only). The depth regularization loss penalizes
+write magnitudes with a variance term that anneals over training,
+encouraging uniform contribution across layers.</p>
+<h3 id="performance-optimizations">3.5 Performance Optimizations</h3>
+<p>Training throughput improved from 5.8K to 29K tokens/second (Phase 1)
+through systematic elimination of CUDA synchronization barriers: setting
+<code>OMP_NUM_THREADS=8</code> before imports (eliminating 212 threads
+per process), removing 8 unnecessary <code>.item()</code> calls per
+forward pass, returning <code>.detach()</code> tensors in loss
+dictionaries instead of <code>.item()</code> scalars (eliminating 96
+syncs per optimizer step), enabling <code>cudnn.benchmark</code>, and
+using <code>non_blocking=True</code> on data transfers. Total: ~160 CUDA
+syncs eliminated per optimizer step.</p>
+<h2 id="results">4. Results</h2>
+<h3 id="training-trajectory">4.1 Training Trajectory</h3>
+<table>
+<thead>
+<tr>
+<th>Step</th>
+<th>Val PPL (pondered)</th>
+<th>Val PPL (no ponder)</th>
+<th>Pondering Benefit</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>2,500</td>
+<td>60.26</td>
+<td>68.61</td>
+<td>12.2%</td>
+</tr>
+<tr>
+<td>3,000</td>
+<td>52.67</td>
+<td>62.66</td>
+<td>15.9%</td>
+</tr>
+<tr>
+<td>4,500</td>
+<td>42.82</td>
+<td>52.31</td>
+<td>18.1%</td>
+</tr>
+<tr>
+<td>6,000</td>
+<td>38.21</td>
+<td>47.00</td>
+<td>18.7%</td>
+</tr>
+<tr>
+<td>8,000</td>
+<td>34.89</td>
+<td>42.71</td>
+<td>18.3%</td>
+</tr>
+<tr>
+<td>10,000</td>
+<td>32.91</td>
+<td>40.17</td>
+<td>18.1%</td>
+</tr>
+<tr>
+<td>12,000</td>
+<td>31.54</td>
+<td>38.66</td>
+<td>18.4%</td>
+</tr>
+<tr>
+<td>17,000</td>
+<td>29.81</td>
+<td>36.64</td>
+<td>18.6%</td>
+</tr>
+<tr>
+<td><strong>20,000</strong></td>
+<td><strong>29.54</strong></td>
+<td><strong>36.33</strong></td>
+<td><strong>18.7%</strong></td>
+</tr>
+</tbody>
+</table>
+<p>Pondering benefit grows from 12% at step 2,500 (when pondering first
+activates) to 16% at step 3,000, then stabilizes at 18–19% from step
+4,500 onward. This progressive growth indicates that S1/S2
+specialization develops over ~2,500 steps rather than appearing
+instantly, and the stable plateau indicates healthy specialization that
+does not degrade as both pathways improve.</p>
+<h3 id="controlled-baseline-comparisons">4.2 Controlled Baseline
+Comparisons</h3>
+<p>We train two controlled baselines on identical data, tokenizer,
+hyperparameters, and hardware — standard Llama-style transformers <sup><a href="#ref-22" class="cite">[22]</a></sup> (RoPE <sup><a href="#ref-21" class="cite">[21]</a></sup>,
+SwiGLU <sup><a href="#ref-20" class="cite">[20]</a></sup>, RMSNorm <sup><a href="#ref-24" class="cite">[24]</a></sup>, weight tying) with identical effective batch size (96
+sequences), cosine LR schedule, and the same FineWeb-Edu data/validation
+splits:</p>
+<p><strong>Parameter-matched baseline:</strong> 8-layer, d_model=512,
+~57.9M parameters. Matches CWT’s total parameter count.</p>
+<p><strong>Compute-matched baseline:</strong> 13-layer, d_model=512,
+~67.5M parameters. Has approximately the same amount of attention+FFN
+capacity as CWT would need to achieve compute parity.</p>
+<table>
+<thead>
+<tr>
+<th>Model</th>
+<th style="text-align: center;">Total Params</th>
+<th style="text-align: center;">Attn+FFN</th>
+<th style="text-align: center;">Layers</th>
+<th style="text-align: center;">Val PPL</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>CWT v5.6 (pondered)</strong></td>
+<td style="text-align: center;"><strong>57.8M</strong></td>
+<td style="text-align: center;"><strong>22.9M</strong></td>
+<td style="text-align: center;"><strong>8</strong></td>
+<td style="text-align: center;"><strong>29.54</strong></td>
+</tr>
+<tr>
+<td>Parameter-matched baseline</td>
+<td style="text-align: center;">57.9M</td>
+<td style="text-align: center;">~32M</td>
+<td style="text-align: center;">8</td>
+<td style="text-align: center;">30.67</td>
+</tr>
+<tr>
+<td><strong>CWT v5.6 (no ponder)</strong></td>
+<td style="text-align: center;"><strong>57.8M</strong></td>
+<td style="text-align: center;"><strong>22.9M</strong></td>
+<td style="text-align: center;"><strong>8</strong></td>
+<td style="text-align: center;"><strong>36.33</strong></td>
+</tr>
+<tr>
+<td>Compute-matched baseline</td>
+<td style="text-align: center;">67.5M</td>
+<td style="text-align: center;">41.7M</td>
+<td style="text-align: center;">13</td>
+<td style="text-align: center;">29.04</td>
+</tr>
+<tr>
+<td>SmolLM2-70M <sup><a href="#ref-2" class="cite">[2]</a></sup></td>
+<td style="text-align: center;">69M</td>
+<td style="text-align: center;">—</td>
+<td style="text-align: center;">32</td>
+<td style="text-align: center;">37.72*</td>
+</tr>
+</tbody>
+</table>
+<p>*SmolLM2-70M trained on 30.6B tokens (6× more data); different
+validation protocol.</p>
+<p>CWT achieves several notable results. Against the parameter-matched
+baseline (same total parameters, same layer count), CWT wins by 3.7%
+despite having fewer attention+FFN parameters — the workspace overhead
+pays for itself and then some. Against the compute-matched baseline (82%
+more attention+FFN capacity, 5 more layers), CWT comes within 1.7% in
+PPL (29.54 vs 29.04), demonstrating that the workspace makes 22.9M compute parameters do
+nearly the work of 41.7M. CWT's S1-only path (PPL 36.33) outperforms
+SmolLM2-70M (PPL 37.72) with 6× fewer training tokens.</p>
+<h3 id="compute-efficiency-analysis">4.3 Compute Efficiency
+Analysis</h3>
+<p>The central finding of the baseline comparisons is that CWT achieves
+its quality not through total parameter count but through compute
+efficiency — the workspace infrastructure makes each attention+FFN
+parameter substantially more productive.</p>
+<p><strong>Parameter allocation comparison (CWT vs compute-matched
+baseline):</strong></p>
+<table>
+<thead>
+<tr>
+<th>Component</th>
+<th style="text-align: center;">13-Layer Baseline</th>
+<th style="text-align: center;">CWT (8-layer)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Embedding (tied)</td>
+<td style="text-align: center;">25.7M</td>
+<td style="text-align: center;">25.7M</td>
+</tr>
+<tr>
+<td>Attention</td>
+<td style="text-align: center;">13.6M</td>
+<td style="text-align: center;">5.6M</td>
+</tr>
+<tr>
+<td>FFN</td>
+<td style="text-align: center;">28.1M</td>
+<td style="text-align: center;">17.3M</td>
+</tr>
+<tr>
+<td><strong>Core compute subtotal</strong></td>
+<td style="text-align: center;"><strong>41.7M</strong></td>
+<td style="text-align: center;"><strong>22.9M</strong></td>
+</tr>
+<tr>
+<td>Workspace I/O (read/write proj.)</td>
+<td style="text-align: center;">—</td>
+<td style="text-align: center;">3.6M</td>
+</tr>
+<tr>
+<td>Output decoder FFNs</td>
+<td style="text-align: center;">—</td>
+<td style="text-align: center;">4.3M</td>
+</tr>
+<tr>
+<td>Embedding→state projection</td>
+<td style="text-align: center;">—</td>
+<td style="text-align: center;">0.5M</td>
+</tr>
+<tr>
+<td>Subspace collapse</td>
+<td style="text-align: center;">—</td>
+<td style="text-align: center;">0.4M</td>
+</tr>
+<tr>
+<td>Workspace infra (gates, tags, norms)</td>
+<td style="text-align: center;">—</td>
+<td style="text-align: center;">0.1M</td>
+</tr>
+<tr>
+<td>Epistemic modules</td>
+<td style="text-align: center;">—</td>
+<td style="text-align: center;">0.3M</td>
+</tr>
+<tr>
+<td>Norms + misc</td>
+<td style="text-align: center;">0.1M</td>
+<td style="text-align: center;">—</td>
+</tr>
+<tr>
+<td><strong>Workspace overhead subtotal</strong></td>
+<td style="text-align: center;"><strong>—</strong></td>
+<td style="text-align: center;"><strong>~9.2M</strong></td>
+</tr>
+</tbody>
+</table>
+<p>CWT dedicates 22.9M parameters to attention and FFN — the components
+that perform actual sequence modeling computation. The compute-matched
+baseline dedicates 41.7M to the same components. CWT’s workspace
+infrastructure costs ~9.2M parameters but makes each remaining compute
+parameter substantially more effective, achieving near-equivalent perplexity (within 1.7%) with
+a 45% smaller core compute budget.</p>
+<p>This reframes the architecture’s value proposition: the workspace
+provides structural addressing that standard transformers must learn
+implicitly, and this implicit routing consumes a significant fraction of
+a standard transformer’s parameter budget. CWT’s explicit structural
+addressing costs ~16% of total parameters but recovers more than it
+costs.</p>
+<p><strong>Scaling implication:</strong> The workspace overhead (~9.2M)
+is roughly fixed regardless of depth, while attention+FFN budget grows
+linearly with layers. At 130M total parameters, the overhead drops from
+~16% to ~5–7%. At 300M+ it becomes noise. CWT’s efficiency advantage
+should therefore increase with scale.</p>
+<h3 id="benchmark-evaluation">4.4 Benchmark Evaluation</h3>
+<p>We evaluate CWT and both baselines on standard
+zero-shot benchmarks using lm-evaluation-harness <sup><a href="#ref-10" class="cite">[10]</a></sup>:</p>
+<table>
+<colgroup>
+<col style="width: 30%" />
+<col style="width: 14%" />
+<col style="width: 14%" />
+<col style="width: 14%" />
+<col style="width: 14%" />
+</colgroup>
+<thead>
+<tr>
+<th>Benchmark</th>
+<th style="text-align: center;">CWT (no ponder)</th>
+<th style="text-align: center;">CWT (pondered)</th>
+<th style="text-align: center;">Param-Matched (8L)</th>
+<th style="text-align: center;">Compute-Matched (13L)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>ARC-Easy (acc)</td>
+<td style="text-align: center;">45.2</td>
+<td style="text-align: center;">45.6</td>
+<td style="text-align: center;">44.5</td>
+<td style="text-align: center;">45.9</td>
+</tr>
+<tr>
+<td>ARC-Challenge (acc_norm)</td>
+<td style="text-align: center;">22.9</td>
+<td style="text-align: center;">23.0</td>
+<td style="text-align: center;">23.6</td>
+<td style="text-align: center;">23.7</td>
+</tr>
+<tr>
+<td>BoolQ</td>
+<td style="text-align: center;">56.5</td>
+<td style="text-align: center;"><strong>58.8</strong></td>
+<td style="text-align: center;">55.2</td>
+<td style="text-align: center;">58.6</td>
+</tr>
+<tr>
+<td>CommonsenseQA</td>
+<td style="text-align: center;">19.7</td>
+<td style="text-align: center;">19.6</td>
+<td style="text-align: center;">19.6</td>
+<td style="text-align: center;">19.6</td>
+</tr>
+<tr>
+<td>COPA</td>
+<td style="text-align: center;"><strong>62.0</strong></td>
+<td style="text-align: center;">60.0</td>
+<td style="text-align: center;">60.0</td>
+<td style="text-align: center;">57.0</td>
+</tr>
+<tr>
+<td>HellaSwag (acc_norm)</td>
+<td style="text-align: center;">27.3</td>
+<td style="text-align: center;">27.3</td>
+<td style="text-align: center;">27.3</td>
+<td style="text-align: center;">27.7</td>
+</tr>
+<tr>
+<td>LAMBADA (ppl)</td>
+<td style="text-align: center;">878.0</td>
+<td style="text-align: center;">578.2</td>
+<td style="text-align: center;">647.4</td>
+<td style="text-align: center;"><strong>562.3</strong></td>
+</tr>
+<tr>
+<td>OpenBookQA (acc_norm)</td>
+<td style="text-align: center;">29.0</td>
+<td style="text-align: center;"><strong>29.8</strong></td>
+<td style="text-align: center;">28.8</td>
+<td style="text-align: center;">29.6</td>
+</tr>
+<tr>
+<td>PIQA (acc)</td>
+<td style="text-align: center;">58.9</td>
+<td style="text-align: center;"><strong>59.8</strong></td>
+<td style="text-align: center;">59.5</td>
+<td style="text-align: center;">59.2</td>
+</tr>
+<tr>
+<td>SciQ (acc)</td>
+<td style="text-align: center;">66.7</td>
+<td style="text-align: center;">65.5</td>
+<td style="text-align: center;">66.8</td>
+<td style="text-align: center;"><strong>70.2</strong></td>
+</tr>
+<tr>
+<td>WinoGrande</td>
+<td style="text-align: center;">51.1</td>
+<td style="text-align: center;">49.5</td>
+<td style="text-align: center;">51.3</td>
+<td style="text-align: center;"><strong>52.9</strong></td>
+</tr>
+</tbody>
+</table>
+<p>At 57–58M parameters with zero-shot evaluation, most benchmarks are
+near random chance (CommonsenseQA: 19.7% vs 20% random, WinoGrande: ~51%
+vs 50% random) and differences are within standard error margins. We
+include these results for completeness but note that zero-shot
+benchmarks at this scale lack the statistical power to meaningfully
+differentiate architectures. The perplexity comparison on held-out data
+from the training distribution (Section 4.2) provides a more reliable
+signal.</p>
+<p>Two observations merit noting. Pondering provides the largest gains
+on context-dependent tasks: LAMBADA perplexity improves 34% (878 → 578)
+and BoolQ accuracy improves 2.3 points, both tasks that require
+integrating passage-level context to select answers. Conversely,
+pondering slightly hurts on pattern-matching tasks (SciQ -1.2,
+WinoGrande -1.6), suggesting that the halt head’s notion of “which
+tokens need more processing” is calibrated for language modeling loss on
+educational text rather than for multiple-choice reasoning. The
+deployment compute tradeoffs in Section 5.5 provide knobs to address
+this.</p>
+<p>The high LAMBADA perplexity across all models (~578–878) reflects the
+training data distribution: CWT and both baselines were trained
+exclusively on educational text and have never seen the narrative prose
+that LAMBADA requires. This is a data limitation, not an architectural
+one.</p>
+<h2 id="ablation-study">5. Ablation Study</h2>
+<p>We perform a comprehensive ablation suite of 30+ interventions on the
+step 20,000 checkpoint (baseline PPL 28.49). Ablations are organized
+into four tiers by impact severity.</p>
+<h3 id="tier-1-existential-architecture-collapses">5.1 Tier 1 —
+Existential (architecture collapses)</h3>
+<table>
+<thead>
+<tr>
+<th>Ablation</th>
+<th>PPL</th>
+<th>Degradation</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Max Amnesia (zero all memory between layers)</td>
+<td>2,668.20</td>
+<td>+9,263%</td>
+</tr>
+<tr>
+<td>Zero Hub Shared (clear central hub)</td>
+<td>2,341.01</td>
+<td>+8,114%</td>
+</tr>
+<tr>
+<td>Zero Tags (remove identity markers)</td>
+<td>1,279.94</td>
+<td>+4,392%</td>
+</tr>
+<tr>
+<td>Shuffle Tags (randomize tag positions)</td>
+<td>515.40</td>
+<td>+1,709%</td>
+</tr>
+<tr>
+<td>Skip Decoder FFN (remove output processing)</td>
+<td>161.72</td>
+<td>+468%</td>
+</tr>
+</tbody>
+</table>
+<p>The hub shared region and tags are existentially critical. Removing
+either produces catastrophic failure, confirming that the workspace
+architecture is not merely a wrapper around standard attention — the
+structural addressing is load-bearing. The gap between Zero Tags
+(+4,392%) and Shuffle Tags (+1,709%) shows that tag presence matters,
+but correct tag-to-layer assignment nearly triples the benefit.</p>
+<h3 id="tier-2-critical-severe-quality-loss">5.2 Tier 2 — Critical
+(severe quality loss)</h3>
+<table>
+<thead>
+<tr>
+<th>Ablation</th>
+<th>PPL</th>
+<th>Degradation</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Noise Hub (Gaussian noise injection)</td>
+<td>274.05</td>
+<td>+862%</td>
+</tr>
+<tr>
+<td>Hub Writes ×2 (double write magnitudes)</td>
+<td>184.28</td>
+<td>+547%</td>
+</tr>
+<tr>
+<td>Zero Billboards (clear broadcast channels)</td>
+<td>78.75</td>
+<td>+177%</td>
+</tr>
+<tr>
+<td>Zero Designator Signature (remove layer identity)</td>
+<td>62.42</td>
+<td>+119%</td>
+</tr>
+</tbody>
+</table>
+<p>Hub Writes ×2 increased from +76% at step 8,000 to +547% at step
+20,000. This reveals that the hub develops precise calibration during
+training — each dimension carries specific information at carefully
+tuned magnitudes. Doubling all writes at convergence is catastrophic,
+while early in training the model can partially tolerate it. This has
+direct implications for scaling: hub write magnitudes become an
+increasingly tight invariant that the model’s computation relies
+upon.</p>
+<h3 id="tier-3-important-meaningful-quality-loss">5.3 Tier 3 — Important
+(meaningful quality loss)</h3>
+<table>
+<thead>
+<tr>
+<th>Ablation</th>
+<th>PPL</th>
+<th>Degradation</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Zero Spokes (clear private memory)</td>
+<td>48.44</td>
+<td>+70%</td>
+</tr>
+<tr>
+<td>Dead Gates (set all gates to 1.0)</td>
+<td>43.80</td>
+<td>+54%</td>
+</tr>
+<tr>
+<td>Hub Writes ×0.5</td>
+<td>39.14</td>
+<td>+37%</td>
+</tr>
+<tr>
+<td>Freeze Hub During S2</td>
+<td>37.02</td>
+<td>+30%</td>
+</tr>
+<tr>
+<td>Kill System 2 (skip S2 entirely)</td>
+<td>36.75</td>
+<td>+29%</td>
+</tr>
+<tr>
+<td>No Soft Ponder Lock</td>
+<td>34.99</td>
+<td>+23%</td>
+</tr>
+<tr>
+<td>Kill Pondering (run S2 once)</td>
+<td>34.82</td>
+<td>+22%</td>
+</tr>
+<tr>
+<td>Max Pondering (force all 5 steps)</td>
+<td>33.74</td>
+<td>+18%</td>
+</tr>
+</tbody>
+</table>
+<p>Kill Pondering (+22%) versus Max Pondering (+18%) confirms that the
+learned halt distribution adds value — the weighted combination
+outperforms both no pondering and forced maximum pondering. The halt
+head is making useful per-token allocation decisions rather than simply
+averaging across all steps.</p>
+<h3 id="tier-4-minimal-dispensable-components">5.4 Tier 4 — Minimal
+(dispensable components)</h3>
+<table>
+<thead>
+<tr>
+<th>Ablation</th>
+<th>PPL</th>
+<th>Degradation</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Collapse Noise</td>
+<td>31.70</td>
+<td>+11%</td>
+</tr>
+<tr>
+<td>Inverted Epistemic Gate</td>
+<td>31.06</td>
+<td>+2.5%</td>
+</tr>
+<tr>
+<td>Zero Convergence Head</td>
+<td>28.49</td>
+<td>0.0%</td>
+</tr>
+<tr>
+<td>Epistemic Gate</td>
+<td>28.50</td>
+<td>+0.04%</td>
+</tr>
+</tbody>
+</table>
+<p>The epistemic gate and convergence head have no measurable impact on
+language modeling quality. This is by design — they are monitoring
+infrastructure, not core computation components. The convergence head
+accurately predicts hub delta norms (Pearson correlation 0.72 at step
+20K) but this prediction is only useful at inference for early stopping
+decisions, not for training quality. The clean separation between
+load-bearing structure (Tiers 1–3) and dispensable instrumentation (Tier
+4) validates the architecture’s modularity.</p>
+<h3 id="deployment-compute-tradeoffs">5.5 Deployment Compute
+Tradeoffs</h3>
+<table>
+<thead>
+<tr>
+<th>Mode</th>
+<th style="text-align: center;">Effective Layers</th>
+<th style="text-align: center;">PPL</th>
+<th style="text-align: center;">Relative Compute</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>No ponder</td>
+<td style="text-align: center;">8</td>
+<td style="text-align: center;">34.82</td>
+<td style="text-align: center;">1.0×</td>
+</tr>
+<tr>
+<td>Low effort (1 step)</td>
+<td style="text-align: center;">10</td>
+<td style="text-align: center;">33.09</td>
+<td style="text-align: center;">1.25×</td>
+</tr>
+<tr>
+<td>Medium effort (2 steps)</td>
+<td style="text-align: center;">12</td>
+<td style="text-align: center;">31.14</td>
+<td style="text-align: center;">1.5×</td>
+</tr>
+<tr>
+<td>Full (5 steps)</td>
+<td style="text-align: center;">18</td>
+<td style="text-align: center;">28.49</td>
+<td style="text-align: center;">2.25×</td>
+</tr>
+</tbody>
+</table>
+<p>The architecture provides a smooth compute/quality tradeoff at
+deployment time. Medium effort (2 ponder steps) achieves PPL 31.14 at
+only 1.5× the compute of the no-ponder path. The parameter-matched
+baseline transformer offers no such flexibility — it always requires its
+fixed layer count with no ability to trade compute for quality at
+inference time.</p>
+<h2 id="epistemic-self-monitoring">6. Epistemic Self-Monitoring</h2>
+<h3 id="hub-delta-dynamics">6.1 Hub Delta Dynamics</h3>
+<p>Rather than training auxiliary classifiers for uncertainty
+estimation, CWT derives epistemic signals directly from hub dynamics. At
+each layer, the hub delta norm — the magnitude of change to the hub
+shared region — provides a natural measure of how much the model is
+still revising its understanding:</p>
+<p><span class="math display">\[\delta_n = \|
+\text{hub}_{\text{after\_layer\_n}} -
+\text{hub}_{\text{before\_layer\_n}} \|_2\]</span></p>
+<p>A DeltaNormalizer module tracks running statistics of delta norms via
+exponential moving average and maps raw deltas to calibrated uncertainty
+scores through sigmoid normalization:</p>
+<p><span class="math display">\[u = \sigma\left(\frac{\delta -
+\mu_{\text{EMA}}}{\sigma_{\text{EMA}}}\right)\]</span></p>
+<p>This self-calibrating approach produces honest uncertainty from step
+1 of training. The normalizer uses pure buffers (no learned parameters),
+cold-starts from the first batch, and requires no hyperparameter
+tuning.</p>
+<h3 id="epistemic-classification-results">6.2 Epistemic Classification
+Results</h3>
+<p>At step 20,000, the hub delta-based classification correctly
+differentiates content types:</p>
+<table>
+<thead>
+<tr>
+<th>Category</th>
+<th style="text-align: center;">Mean Non-Convergence</th>
+<th style="text-align: center;">Unresolvable %</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>In-distribution (educational)</td>
+<td style="text-align: center;">2.26</td>
+<td style="text-align: center;">37%</td>
+</tr>
+<tr>
+<td>Domain gradient (easy → hard)</td>
+<td style="text-align: center;">2.23</td>
+<td style="text-align: center;">24%</td>
+</tr>
+<tr>
+<td>Edge cases (mixed)</td>
+<td style="text-align: center;">2.32</td>
+<td style="text-align: center;">32%</td>
+</tr>
+<tr>
+<td>Out-of-distribution</td>
+<td style="text-align: center;">2.51</td>
+<td style="text-align: center;">61%</td>
+</tr>
+</tbody>
+</table>
+<p>Internet slang (“lmao bruh fr fr no cap”) produces the highest
+unresolvable rate at 90%, correctly reflecting the model’s inability to
+process this content after training exclusively on educational text. The
+temporal edge case “According to recent studies in 2025” dropped from
+100% unresolvable at step 8,000 to 28% at step 20,000 — the model
+correctly learned that this is a common format pattern in FineWeb-Edu,
+even though the specific date is unfamiliar.</p>
+<h3 id="comparison-with-probe-based-approaches">6.3 Comparison with
+Probe-Based Approaches</h3>
+<p>An earlier version (v5.4) used vocabulary-projection probes at each
+layer to compute KL divergence between consecutive layers’ predictions.
+This approach suffered from two fundamental problems:</p>
+<p><strong>False early convergence:</strong> At step 25, all layers
+predicted near-identical random distributions over the vocabulary,
+producing low KL divergence. The probe reported “convergent” when the
+model was actually confidently clueless. Hub deltas of 7–9 at the same
+step correctly report high uncertainty.</p>
+<p><strong>Prohibitive compute cost:</strong> Each probed layer required
+a matmul against the full vocabulary (<span class="math inline">\(512
+\times 50{,}257 \approx 25\)</span>M elements), plus softmax and KL over
+50K logits. Replacing probes with hub self-distillation (hub → 128
+bottleneck → hub MSE) yielded a 250× reduction in supervision compute
+and a 4.5× throughput improvement.</p>
+<h2 id="long-context-extrapolation">7. Long-Context Extrapolation</h2>
+<p>We evaluate CWT and the parameter-matched baseline on contexts longer
+than the 4,096-token training length using four RoPE <sup><a href="#ref-21" class="cite">[21]</a></sup> scaling strategies:
+direct (no modification), linear position interpolation, NTK frequency
+scaling <sup><a href="#ref-5" class="cite">[5]</a></sup>, and YaRN <sup><a href="#ref-17" class="cite">[17]</a></sup>.</p>
+<h3 id="cwt-vs-baseline-extrapolation-ntk-scaling">7.1 CWT vs Baseline
+Extrapolation (NTK scaling)</h3>
+<table>
+<colgroup>
+<col style="width: 31%" />
+<col style="width: 17%" />
+<col style="width: 17%" />
+<col style="width: 17%" />
+<col style="width: 17%" />
+</colgroup>
+<thead>
+<tr>
+<th>Context</th>
+<th style="text-align: center;">CWT (pondered)</th>
+<th style="text-align: center;">CWT Degradation</th>
+<th style="text-align: center;">Baseline</th>
+<th style="text-align: center;">Baseline Degradation</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>4,096 (1.0×)</td>
+<td style="text-align: center;">28.48</td>
+<td style="text-align: center;">baseline</td>
+<td style="text-align: center;">29.01</td>
+<td style="text-align: center;">baseline</td>
+</tr>
+<tr>
+<td>5,120 (1.25×)</td>
+<td style="text-align: center;">29.68</td>
+<td style="text-align: center;">+4.2%</td>
+<td style="text-align: center;">29.97</td>
+<td style="text-align: center;">+3.3%</td>
+</tr>
+<tr>
+<td>6,144 (1.5×)</td>
+<td style="text-align: center;">28.69</td>
+<td style="text-align: center;">+0.7%</td>
+<td style="text-align: center;">29.06</td>
+<td style="text-align: center;">+0.2%</td>
+</tr>
+<tr>
+<td>8,192 (2.0×)</td>
+<td style="text-align: center;">31.29</td>
+<td style="text-align: center;">+9.9%</td>
+<td style="text-align: center;">31.97</td>
+<td style="text-align: center;">+10.2%</td>
+</tr>
+<tr>
+<td>12,288 (3.0×)</td>
+<td style="text-align: center;">42.12</td>
+<td style="text-align: center;">+47.9%</td>
+<td style="text-align: center;">39.94</td>
+<td style="text-align: center;">+37.7%</td>
+</tr>
+<tr>
+<td>16,384 (4.0×)</td>
+<td style="text-align: center;">90.72</td>
+<td style="text-align: center;">+218.5%</td>
+<td style="text-align: center;">61.15</td>
+<td style="text-align: center;">+110.8%</td>
+</tr>
+</tbody>
+</table>
+<p>Both architectures degrade at comparable rates up to 2× training
+length, with CWT maintaining a slight absolute PPL advantage inherited
+from its lower starting point. Beyond 3×, the baseline degrades more
+gracefully — CWT’s pondering loop becomes a liability at extreme
+extrapolation lengths where positional encoding degradation corrupts the
+iterative refinement process.</p>
+<p>The practical takeaway is that long-context extrapolation behavior is
+primarily determined by the RoPE scaling strategy rather than the model
+architecture. Both models achieve under 10% degradation at 2× with NTK
+scaling, confirming that 50–100% context extension is viable for
+deployment without fine-tuning.</p>
+<h3 id="pondering-benefit-by-rope-strategy">7.2 Pondering Benefit by
+RoPE Strategy</h3>
+<p>The relationship between pondering benefit and context length is
+strategy-dependent:</p>
+<table>
+<colgroup>
+<col style="width: 37%" />
+<col style="width: 20%" />
+<col style="width: 20%" />
+<col style="width: 20%" />
+</colgroup>
+<thead>
+<tr>
+<th>Context</th>
+<th style="text-align: center;">NTK Ponder Benefit</th>
+<th style="text-align: center;">YaRN Ponder Benefit</th>
+<th style="text-align: center;">Direct Ponder Benefit</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>4,096 (1.0×)</td>
+<td style="text-align: center;">18.7%</td>
+<td style="text-align: center;">—</td>
+<td style="text-align: center;">18.7%</td>
+</tr>
+<tr>
+<td>5,120 (1.25×)</td>
+<td style="text-align: center;">19.6%</td>
+<td style="text-align: center;">18.8%</td>
+<td style="text-align: center;">20.2%</td>
+</tr>
+<tr>
+<td>6,144 (1.5×)</td>
+<td style="text-align: center;">20.1%</td>
+<td style="text-align: center;">18.2%</td>
+<td style="text-align: center;">12.0%</td>
+</tr>
+<tr>
+<td>8,192 (2.0×)</td>
+<td style="text-align: center;">20.7%</td>
+<td style="text-align: center;">13.8%</td>
+<td style="text-align: center;">0.8%</td>
+</tr>
+<tr>
+<td>12,288 (3.0×)</td>
+<td style="text-align: center;">28.4%</td>
+<td style="text-align: center;">8.4%</td>
+<td style="text-align: center;">1.2%</td>
+</tr>
+<tr>
+<td>16,384 (4.0×)</td>
+<td style="text-align: center;">17.1%</td>
+<td style="text-align: center;">5.0%</td>
+<td style="text-align: center;">-11.6%</td>
+</tr>
+</tbody>
+</table>
+<p>Under NTK scaling, pondering benefit increases with context length up
+to 3×, peaking at 28.4%. NTK’s preservation of local attention patterns
+provides stable enough representations for the S2 ponder loop to perform
+useful iterative refinement on longer contexts. Under YaRN and direct
+extrapolation, pondering benefit decreases with context length — the
+positional encoding degradation corrupts the representations that the
+ponder loop operates on, making additional iterations
+counterproductive.</p>
+<p>This has practical implications: the choice of RoPE scaling strategy
+determines not only base extrapolation quality but also whether adaptive
+compute remains beneficial at extended lengths. NTK scaling is
+recommended for CWT deployments that require both long-context support
+and full pondering.</p>
+<h2 id="workspace-visualization">8. Workspace Visualization</h2>
+<p>The structured workspace enables direct 3D visualization of internal
+processing states — an interpretability capability that standard
+transformers lack because their residual stream is an opaque
+superposition of all information.</p>
+<h3 id="method">8.1 Method</h3>
+<p>We record hub shared state vectors at every layer pass during
+generation using a SQLite-backed workspace state recorder, then apply
+UMAP <sup><a href="#ref-16" class="cite">[16]</a></sup> dimensionality reduction to project 256-dimensional hub states into
+3D space. Each point represents the hub state at one (token, layer)
+position, colored by layer index (purple = early S1, yellow = late S2).
+Interactive Plotly visualizations allow rotation and inspection of
+trajectories.</p>
+<h3 id="in-distribution-processing">8.2 In-Distribution Processing</h3>
+<p>For the prompt “The process of photosynthesis involves,” the hub
+trajectory shows a clear three-phase structure:</p>
+<p><strong>Foundation</strong> (layers 0–2, purple): All tokens cluster
+in a tight central region. Early S1 layers build a shared contextual
+representation.</p>
+<p><strong>Differentiation</strong> (layers 3–5, teal/green):
+Trajectories branch outward as each token’s representation diverges
+based on semantic content.</p>
+<p><strong>Convergence</strong> (layers 6–7, yellow): Tokens settle into
+distinct, tightly clustered final positions. S2 pondering produces small
+refinements around settled representations.</p>
+
+<div class="viz-section">
+  <div class="viz-frame-wrapper">
+    <iframe src="visualizations/The_process_of_photo_0bc78602_hub_trajectory.html" height="680" loading="lazy" sandbox="allow-scripts allow-same-origin" title="Hub Trajectory — In-Distribution"></iframe>
+  </div>
+  <p class="viz-caption">Figure 8.1 — 3D UMAP hub trajectory for "The process of photosynthesis involves…". Purple = early S1 layers; yellow = late S2 pondering. Drag to rotate.</p>
+
+  <div class="viz-frame-wrapper">
+    <iframe src="visualizations/The_process_of_photo_0bc78602_topology_animation.html" height="620" loading="lazy" sandbox="allow-scripts allow-same-origin" title="Topology Animation — In-Distribution"></iframe>
+  </div>
+  <p class="viz-caption">Figure 8.2 — Animated topology showing hub state evolution across all layer passes.</p>
+
+  <div class="viz-grid">
+    <div class="viz-grid-item">
+      <div class="viz-frame-wrapper">
+        <iframe src="visualizations/The_process_of_photo_0bc78602_workspace_regions.html" height="460" loading="lazy" sandbox="allow-scripts allow-same-origin" title="Workspace Regions"></iframe>
+      </div>
+      <p class="viz-caption">Workspace region activity</p>
+    </div>
+    <div class="viz-grid-item">
+      <div class="viz-frame-wrapper">
+        <iframe src="visualizations/The_process_of_photo_0bc78602_hub_deltas.html" height="460" loading="lazy" sandbox="allow-scripts allow-same-origin" title="Hub Deltas"></iframe>
+      </div>
+      <p class="viz-caption">Hub delta norms (epistemic signals)</p>
+    </div>
+    <div class="viz-grid-item">
+      <div class="viz-frame-wrapper">
+        <iframe src="visualizations/The_process_of_photo_0bc78602_hub_similarity.html" height="460" loading="lazy" sandbox="allow-scripts allow-same-origin" title="Hub Similarity"></iframe>
+      </div>
+      <p class="viz-caption">Inter-layer hub state similarity</p>
+    </div>
+    <div class="viz-grid-item">
+      <div class="viz-frame-wrapper">
+        <iframe src="visualizations/The_process_of_photo_0bc78602_decay_gates.html" height="460" loading="lazy" sandbox="allow-scripts allow-same-origin" title="Decay Gates"></iframe>
+      </div>
+      <p class="viz-caption">Decay gate values per layer</p>
+    </div>
+    <div class="viz-grid-item">
+      <div class="viz-frame-wrapper">
+        <iframe src="visualizations/The_process_of_photo_0bc78602_gate_selectivity.html" height="460" loading="lazy" sandbox="allow-scripts allow-same-origin" title="Gate Selectivity"></iframe>
+      </div>
+      <p class="viz-caption">Gate selectivity patterns</p>
+    </div>
+    <div class="viz-grid-item">
+      <div class="viz-frame-wrapper">
+        <iframe src="visualizations/The_process_of_photo_0bc78602_ponder_oscillation.html" height="460" loading="lazy" sandbox="allow-scripts allow-same-origin" title="Ponder Oscillation"></iframe>
+      </div>
+      <p class="viz-caption">S2 ponder oscillation dynamics</p>
+    </div>
+    <div class="viz-grid-item">
+      <div class="viz-frame-wrapper">
+        <iframe src="visualizations/The_process_of_photo_0bc78602_write_magnitudes.html" height="460" loading="lazy" sandbox="allow-scripts allow-same-origin" title="Write Magnitudes"></iframe>
+      </div>
+      <p class="viz-caption">Hub write magnitudes per layer</p>
+    </div>
+    <div class="viz-grid-item">
+      <div class="viz-frame-wrapper">
+        <iframe src="visualizations/The_process_of_photo_0bc78602_layer_ranking.html" height="460" loading="lazy" sandbox="allow-scripts allow-same-origin" title="Layer Ranking"></iframe>
+      </div>
+      <p class="viz-caption">Layer contribution ranking</p>
+    </div>
+  </div>
+</div>
+
+<h3 id="out-of-distribution-processing">8.3 Out-of-Distribution
+Processing</h3>
+<p>For the OOD prompt “hey bud no cap fo real fo real,” the
+visualization reveals representational collapse: no central foundation
+cluster forms, layer trajectories are compressed to near-points (minimal
+hub modification per layer), S2 oscillation fires mechanically but
+produces minimal hub changes, and yellow S2 clusters show poor
+separation with high cross-position similarity (0.64 vs 0.35 for
+in-distribution).</p>
+
+<div class="viz-section">
+  <div class="viz-frame-wrapper">
+    <iframe src="visualizations/hey_bud,_no_cap,_fo__c986099a_hub_trajectory.html" height="680" loading="lazy" sandbox="allow-scripts allow-same-origin" title="Hub Trajectory — OOD"></iframe>
+  </div>
+  <p class="viz-caption">Figure 8.3 — 3D UMAP hub trajectory for "hey bud no cap fo real fo real". Note the compressed, near-point trajectories vs. the rich branching in Figure 8.1.</p>
+
+  <div class="viz-grid">
+    <div class="viz-grid-item">
+      <div class="viz-frame-wrapper">
+        <iframe src="visualizations/hey_bud,_no_cap,_fo__c986099a_workspace_regions.html" height="460" loading="lazy" sandbox="allow-scripts allow-same-origin" title="Workspace Regions — OOD"></iframe>
+      </div>
+      <p class="viz-caption">Workspace region activity (OOD)</p>
+    </div>
+    <div class="viz-grid-item">
+      <div class="viz-frame-wrapper">
+        <iframe src="visualizations/hey_bud,_no_cap,_fo__c986099a_hub_deltas.html" height="460" loading="lazy" sandbox="allow-scripts allow-same-origin" title="Hub Deltas — OOD"></iframe>
+      </div>
+      <p class="viz-caption">Hub delta norms — persistently high uncertainty</p>
+    </div>
+    <div class="viz-grid-item">
+      <div class="viz-frame-wrapper">
+        <iframe src="visualizations/hey_bud,_no_cap,_fo__c986099a_decay_gates.html" height="460" loading="lazy" sandbox="allow-scripts allow-same-origin" title="Decay Gates — OOD"></iframe>
+      </div>
+      <p class="viz-caption">Decay gate values (OOD)</p>
+    </div>
+    <div class="viz-grid-item">
+      <div class="viz-frame-wrapper">
+        <iframe src="visualizations/hey_bud,_no_cap,_fo__c986099a_ponder_oscillation.html" height="460" loading="lazy" sandbox="allow-scripts allow-same-origin" title="Ponder Oscillation — OOD"></iframe>
+      </div>
+      <p class="viz-caption">S2 ponder oscillation — mechanical, minimal refinement</p>
+    </div>
+    <div class="viz-grid-item">
+      <div class="viz-frame-wrapper">
+        <iframe src="visualizations/hey_bud,_no_cap,_fo__c986099a_write_magnitudes.html" height="460" loading="lazy" sandbox="allow-scripts allow-same-origin" title="Write Magnitudes — OOD"></iframe>
+      </div>
+      <p class="viz-caption">Hub write magnitudes (OOD)</p>
+    </div>
+    <div class="viz-grid-item">
+      <div class="viz-frame-wrapper">
+        <iframe src="visualizations/hey_bud,_no_cap,_fo__c986099a_hub_deltas.html" height="460" loading="lazy" sandbox="allow-scripts allow-same-origin" title="Hub Deltas detail — OOD"></iframe>
+      </div>
+      <p class="viz-caption">Hub delta comparison across ponder steps</p>
+    </div>
+  </div>
+</div>
+
+<h3 id="comparative-visualization">8.4 Comparative Visualization</h3>
+<p>Overlaying in-distribution and OOD hub trajectories in a shared UMAP
+The model builds rich, differentiated representations for familiar content and
+collapses to undifferentiated states for unfamiliar content — a spatial
+manifestation of the epistemic uncertainty signals measured in Section
+6.</p>
+
+<div class="viz-section">
+  <div class="viz-frame-wrapper">
+    <iframe src="visualizations/run_comparison.html" height="700" loading="lazy" sandbox="allow-scripts allow-same-origin" title="In-Distribution vs OOD Comparison"></iframe>
+  </div>
+  <p class="viz-caption">Figure 8.4 — Overlaid UMAP projection of in-distribution (photosynthesis) and OOD (internet slang) hub trajectories.</p>
+</div>
+
+<h2 id="discussion">9. Discussion</h2>
+<h3 id="the-compute-efficiency-argument">9.1 The Compute Efficiency
+Argument</h3>
+<p>The controlled baseline comparisons reveal that CWT’s value is best
+understood through compute efficiency rather than total parameter
+counts. Against the parameter-matched baseline (same total params, same
+layers), CWT wins by 3.7% in PPL despite having fewer attention+FFN
+parameters. Against the compute-matched baseline (82% more
+attention+FFN), CWT comes within 1.7% PPL (29.54 vs 29.04).</p>
+<p>The architectural insight is that standard transformers spend a
+significant fraction of their parameters on implicit routing — learning
+to demultiplex a superposed residual stream, determining what
+information to read, where to write, and what to forget. CWT handles
+this at fixed cost (~9.2M) through explicit structure (tags identify
+writers, spokes guarantee privacy, decay gates manage persistence),
+freeing the remaining parameters for semantic computation.</p>
+<p>The more informative metric for evaluating workspace architectures is
+PPL vs core compute parameters (attention + FFN), on which CWT is nearly
+2× more efficient than a standard transformer. The conventional
+comparison (PPL vs total parameters) penalizes CWT for structural
+addressing overhead that actively improves parameter efficiency.</p>
+<h3 id="output-decoder-as-optimization-target">9.2 Output Decoder as
+Optimization Target</h3>
+<p>The current output decoder contains two full SwiGLU FFN layers
+consuming ~4.3M parameters — equivalent to 2 additional ExpertBlocks.
+These parameters cannot perform attention, cannot read the workspace,
+and cannot interact with context. They are the least efficient
+parameters in the model.</p>
+<p>The baseline transformers use only RMSNorm → tied lm_head after their
+final layer. Since CWT’s SubspaceCollapse already projects workspace
+state back to d_model, a minimal decoder (RMSNorm → tied lm_head) would
+free ~4.3M parameters — enough to fund 1–2 additional ExpertBlocks with
+attention and workspace access.</p>
+<p>More aggressively, reallocating both the decoder savings and reducing
+spoke dimensions from 48d to 32d (supported by the relatively mild +70%
+ablation for Zero Spokes) could fund 4 additional layers. A 12-layer CWT
+(10 S1 + 2 S2) with a slim decoder would achieve compute parity with the
+13-layer baseline while retaining all workspace benefits and pondering
+capability. Given that CWT already matches the 13-layer baseline at 55%
+core compute, achieving compute parity should produce a decisive
+win.</p>
+<h3 id="hub-write-calibration-and-scaling">9.3 Hub Write Calibration and
+Scaling</h3>
+<p>The Hub Writes ×2 ablation revealed that the hub becomes precisely
+calibrated during training — degradation increased from +76% at step
+8,000 to +547% at step 20,000. This has direct implications for scaling
+CWT to larger models. Hub shared dimensions should grow sub-linearly
+with model depth, as each additional layer adds write pressure to the
+shared channel. Write magnitudes may require learnable per-layer scaling
+at larger sizes to maintain calibration. The decay gate mechanism
+naturally handles increasing write pressure from more layers, but the
+calibration sensitivity suggests that gate initialization and bias
+values become increasingly important at scale.</p>
+<h3 id="honest-epistemic-signals">9.4 Honest Epistemic Signals</h3>
+<p>The transition from probe-based to hub delta-based epistemic signals
+represents a principled shift from “what does the model predict” to “how
+much is the model still changing.” The former requires auxiliary
+classifiers that can be dishonest (producing false convergence on random
+inputs). The latter directly measures the model’s internal dynamics and
+is honest by construction — a model that is uncertain will have large
+hub deltas because its layers are actively revising the
+representation.</p>
+<p>This foundation enables a future phase where a lightweight epistemic
+gate is trained post-hoc against frozen model weights, using the
+calibrated delta norms as supervision signal. The gate would learn to
+scale output logits based on genuine model uncertainty, enabling
+deployment-time confidence calibration that is architecturally grounded
+rather than heuristic.</p>
+<h3 id="limitations">9.5 Limitations</h3>
+<p><strong>Evaluation scope:</strong> Zero-shot benchmarks at 57–58M
+parameters are near random chance on most tasks and lack statistical
+power to differentiate architectures. Perplexity on held-out data
+provides the most reliable comparison at this scale. Larger-scale
+training (350M+) is needed for meaningful benchmark discrimination.</p>
+<p><strong>Scale:</strong> We demonstrate CWT at 57.8M parameters only.
+The architectural advantages (structural addressing, adaptive compute)
+are theorized to increase with scale as workspace overhead becomes
+proportionally smaller, but this requires experimental validation at
+130M+ parameters.</p>
+<p><strong>Learning rate schedule:</strong> The current cosine decay
+schedule leaves learning budget on the table. A warmup-stable-decay
+(WSD) schedule — holding at peak LR for steps 1,000–14,000, then cosine
+decaying to <span class="math inline">\(10^{-5}\)</span> — would provide
+approximately 1.7× more effective high-LR training, with projected
+improvement of 2–3 PPL points.</p>
+<p><strong>Inference cost:</strong> CWT with full pondering uses up to
+18 effective layer passes vs the 8-layer baseline’s 8 passes. The
+compute-efficiency argument holds on a per-parameter basis but not on a
+per-FLOP basis at full pondering depth. The no-ponder and low-effort
+deployment modes partially address this. The comparison is most
+favorable when framed as: CWT provides near-equivalent quality to a much
+larger baseline at equal total parameters, with a smooth inference-time
+compute dial that standard transformers cannot offer.</p>
+<p><strong>Decoder overhead:</strong> The current two-FFN output decoder
+consumes ~4.3M parameters suboptimally. This is a known inefficiency
+identified during this work and will be addressed in future
+versions.</p>
+<p><strong>Long-context extrapolation:</strong> CWT’s pondering loop
+becomes counterproductive beyond 3× training length under most RoPE
+scaling strategies. The interaction between adaptive compute and
+positional encoding extrapolation is an open area for investigation.</p>
+<p><strong>Training data distribution:</strong> All models were trained
+exclusively on educational text (FineWeb-Edu). Performance on tasks
+requiring narrative prose, dialogue, or broad world knowledge (e.g.,
+LAMBADA, CommonsenseQA) reflects data coverage limitations, not
+architectural ones.</p>
+<h2 id="related-work">10. Related Work</h2>
+<p><strong>Adaptive Compute Transformers.</strong> Universal Transformer
+(Dehghani et al., 2019) <sup><a href="#ref-8" class="cite">[8]</a></sup> introduced weight sharing across layers with
+adaptive halting. PonderNet (Banino et al., 2021) <sup><a href="#ref-4" class="cite">[4]</a></sup> extended this with
+differentiable halting probabilities. CWT combines adaptive halting with
+structured workspace, giving each iteration a qualitatively different
+function (via evolving hub state and decay gate dynamics) rather than
+simply repeating the same computation on the same residual stream.</p>
+<p><strong>Memory-Augmented Neural Networks.</strong> Neural Turing
+Machines (Graves et al., 2014) <sup><a href="#ref-12" class="cite">[12]</a></sup> and Differentiable Neural Computers
+(Graves et al., 2016) <sup><a href="#ref-13" class="cite">[13]</a></sup> introduced external memory with read/write/erase
+operations. CWT’s workspace is conceptually similar but implemented as a
+partitioned state tensor rather than an external memory — the layers
+themselves serve as read/write controllers through the decay gate
+mechanism, and the structured partitioning (spokes, hub, tags) provides
+architectural guarantees that external memory schemes must learn.</p>
+<p><strong>Global Workspace Theory.</strong> Baars' (1988) <sup><a href="#ref-3" class="cite">[3]</a></sup> cognitive
+architecture posits a shared broadcast medium where specialized
+processors compete for access. CWT’s hub shared region implements this
+directly — all layers can read, but writes are mediated by gates that
+evaluate content relevance. The billboard regions provide guaranteed
+broadcast channels. The workspace visualization (Section 8) provides
+empirical evidence of the global workspace dynamics.</p>
+<p><strong>State Space Models.</strong> Mamba (Gu &amp; Dao, 2023) <sup><a href="#ref-14" class="cite">[14]</a></sup> and
+related architectures learn structured state management across sequence
+positions. CWT manages state across layers rather than positions, but
+shares the principle of gated state updates with learned forgetting. The
+approaches are complementary.</p>
+<p><strong>Efficient Attention.</strong> Multi-head Latent Attention
+(DeepSeek, 2024) <sup><a href="#ref-7" class="cite">[7]</a></sup> compresses KV cache through latent projection. CWT-MLA
+extends this with an architectural privacy constraint that enforces
+spoke separation while sharing hub content through attention, and
+derives KV from hub content rather than the full hidden state.</p>
+<p><strong>Parameter Efficiency in Transformers.</strong>
+Mixture-of-Experts architectures (Fedus et al., 2022) <sup><a href="#ref-9" class="cite">[9]</a></sup> achieve parameter
+efficiency through sparse activation. CWT achieves efficiency through
+structural addressing — all parameters are active for every token, but
+the workspace eliminates the routing overhead that dense transformers
+spend significant capacity on. The two approaches are orthogonal and
+could be combined.</p>
+<h2 id="conclusion">11. Conclusion</h2>
+<p>The Cognitive Workspace Transformer demonstrates that replacing the
+transformer’s undifferentiated residual stream with structured state
+management yields substantial compute efficiency gains. At 57.8M
+parameters, CWT beats a parameter-matched standard transformer by 3.7%
+in perplexity, and comes within 1.7% of a 13-layer baseline that has 82% more core
+compute capacity — the workspace infrastructure makes each attention+FFN
+parameter substantially more effective by providing structural addressing
+that standard transformers must learn implicitly.</p>
+<p>Analysis of the current parameter budget identifies clear
+optimization opportunities: the output decoder consumes ~4.3M parameters
+without workspace access, and reallocating these to additional layers
+with attention could produce further significant gains. The workspace
+overhead (~9.2M) is fixed cost that becomes proportionally smaller at
+scale, predicting increasing compute efficiency advantages at 130M+
+parameters.</p>
+<p>The architecture additionally provides capabilities unavailable in
+standard transformers: smooth inference-time compute/quality tradeoffs
+(PPL 34.82 at 1.0× compute to PPL 28.49 at 2.25×), honest epistemic
+self-monitoring through hub delta dynamics, interpretable 3D
+visualization of internal processing states, and robust long-context
+extrapolation up to 2× training length with under 10% degradation.</p>
+<p>These results suggest that as language models scale, structured state
+management offers a path toward architectures where explicit addressing
+replaces learned routing, adaptive depth replaces fixed depth, and
+internal dynamics provide interpretable uncertainty signals without
+auxiliary classifiers.</p>
+<h2 id="appendix-a-hub-self-distillation-error-profile">Appendix A: Hub
+Self-Distillation Error Profile</h2>
+<table>
+<thead>
+<tr>
+<th>Layer</th>
+<th style="text-align: center;">Type</th>
+<th style="text-align: center;">MSE at Step 8K</th>
+<th style="text-align: center;">MSE at Step 20K</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>L0</td>
+<td style="text-align: center;">S1</td>
+<td style="text-align: center;">0.374</td>
+<td style="text-align: center;">0.228</td>
+</tr>
+<tr>
+<td>L1</td>
+<td style="text-align: center;">S1</td>
+<td style="text-align: center;">0.265</td>
+<td style="text-align: center;">0.150</td>
+</tr>
+<tr>
+<td>L2</td>
+<td style="text-align: center;">S1</td>
+<td style="text-align: center;">0.210</td>
+<td style="text-align: center;">0.118</td>
+</tr>
+<tr>
+<td>L3</td>
+<td style="text-align: center;">S1</td>
+<td style="text-align: center;">0.157</td>
+<td style="text-align: center;">0.090</td>
+</tr>
+<tr>
+<td>L4</td>
+<td style="text-align: center;">S1</td>
+<td style="text-align: center;">0.100</td>
+<td style="text-align: center;">0.056</td>
+</tr>
+<tr>
+<td>L5</td>
+<td style="text-align: center;">S1</td>
+<td style="text-align: center;">0.050</td>
+<td style="text-align: center;">0.024</td>
+</tr>
+<tr>
+<td>L6</td>
+<td style="text-align: center;">S2</td>
+<td style="text-align: center;">0.021</td>
+<td style="text-align: center;">0.009</td>
+</tr>
+<tr>
+<td>L7</td>
+<td style="text-align: center;">S2</td>
+<td style="text-align: center;">0.000</td>
+<td style="text-align: center;">0.000</td>
+</tr>
+</tbody>
+</table>
+<p>Monotonically decreasing error at both checkpoints confirms that each
+layer progressively approximates the final hub state, validating the
+deep supervision approach. The error reduction between 8K and 20K (e.g.,
+L0: 0.374 → 0.228) shows that early layers continue improving their hub
+predictions throughout training.</p>
+<h2 id="appendix-b-convergence-head-accuracy">Appendix B: Convergence
+Head Accuracy</h2>
+<p>The convergence head predicts hub delta norms from hub content alone,
+enabling inference-time convergence estimation without tracking actual
+deltas. At step 20,000:</p>
+<table>
+<thead>
+<tr>
+<th style="text-align: center;">Layer Pass</th>
+<th style="text-align: center;">Actual Delta</th>
+<th style="text-align: center;">Predicted Delta</th>
+<th style="text-align: center;">Absolute Error</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: center;">L8 (S2-L1, step 0)</td>
+<td style="text-align: center;">1.805</td>
+<td style="text-align: center;">1.841</td>
+<td style="text-align: center;">0.036</td>
+</tr>
+<tr>
+<td style="text-align: center;">L10 (S2-L1, step 1)</td>
+<td style="text-align: center;">1.796</td>
+<td style="text-align: center;">1.807</td>
+<td style="text-align: center;">0.011</td>
+</tr>
+<tr>
+<td style="text-align: center;">L12 (S2-L1, step 2)</td>
+<td style="text-align: center;">1.894</td>
+<td style="text-align: center;">1.882</td>
+<td style="text-align: center;">0.012</td>
+</tr>
+<tr>
+<td style="text-align: center;">L14 (S2-L1, step 3)</td>
+<td style="text-align: center;">1.915</td>
+<td style="text-align: center;">1.908</td>
+<td style="text-align: center;">0.007</td>
+</tr>
+<tr>
+<td style="text-align: center;">L16 (S2-L1, step 4)</td>
+<td style="text-align: center;">1.870</td>
+<td style="text-align: center;">1.876</td>
+<td style="text-align: center;">0.006</td>
+</tr>
+<tr>
+<td style="text-align: center;">L18 (S2-L1, step 5)</td>
+<td style="text-align: center;">1.833</td>
+<td style="text-align: center;">1.843</td>
+<td style="text-align: center;">0.010</td>
+</tr>
+</tbody>
+</table>
+<p>Pearson correlation: 0.72 across 240 layer-steps. Mean absolute error
+on S2 layers: 0.014. The convergence head can reliably replace actual
+delta computation at inference time, enabling cheap early-stopping
+decisions.</p>
+<h2
+id="appendix-c-baseline-long-context-extrapolation-comparison">Appendix
+C: Baseline Long-Context Extrapolation Comparison</h2>
+<p>Full NTK degradation comparison between CWT and the parameter-matched
+baseline:</p>
+<table>
+<colgroup>
+<col style="width: 26%" />
+<col style="width: 14%" />
+<col style="width: 14%" />
+<col style="width: 14%" />
+<col style="width: 14%" />
+<col style="width: 14%" />
+</colgroup>
+<thead>
+<tr>
+<th>Context</th>
+<th style="text-align: center;">CWT Pondered</th>
+<th style="text-align: center;">CWT No-Ponder</th>
+<th style="text-align: center;">Baseline</th>
+<th style="text-align: center;">CWT NTK Degrad.</th>
+<th style="text-align: center;">Baseline NTK Degrad.</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>4,096 (1.0×)</td>
+<td style="text-align: center;">28.48</td>
+<td style="text-align: center;">35.03</td>
+<td style="text-align: center;">29.01</td>
+<td style="text-align: center;">baseline</td>
+<td style="text-align: center;">baseline</td>
+</tr>
+<tr>
+<td>6,144 (1.5×)</td>
+<td style="text-align: center;">28.69</td>
+<td style="text-align: center;">35.91</td>
+<td style="text-align: center;">29.06</td>
+<td style="text-align: center;">+0.7%</td>
+<td style="text-align: center;">+0.2%</td>
+</tr>
+<tr>
+<td>8,192 (2.0×)</td>
+<td style="text-align: center;">31.29</td>
+<td style="text-align: center;">39.48</td>
+<td style="text-align: center;">31.97</td>
+<td style="text-align: center;">+9.9%</td>
+<td style="text-align: center;">+10.2%</td>
+</tr>
+<tr>
+<td>12,288 (3.0×)</td>
+<td style="text-align: center;">42.12</td>
+<td style="text-align: center;">58.85</td>
+<td style="text-align: center;">39.94</td>
+<td style="text-align: center;">+47.9%</td>
+<td style="text-align: center;">+37.7%</td>
+</tr>
+<tr>
+<td>16,384 (4.0×)</td>
+<td style="text-align: center;">90.72</td>
+<td style="text-align: center;">109.43</td>
+<td style="text-align: center;">61.15</td>
+<td style="text-align: center;">+218.5%</td>
+<td style="text-align: center;">+110.8%</td>
+</tr>
+</tbody>
+</table>
+<p>Both architectures degrade at comparable rates up to 2× training
+length. Beyond 3×, the baseline degrades more gracefully, as CWT’s
+pondering loop amplifies positional encoding errors across
+iterations.</p>
+<h2 id="appendix-d-complete-ablation-summary">Appendix D: Complete
+Ablation Summary</h2>
+<p>The full ablation suite includes 30+ interventions covering workspace
+structure, pondering dynamics, epistemic monitoring, output processing,
+and deployment configurations. See Section 5 for the tier-organized
+presentation. Key temporal dynamics: Hub Writes ×2 degradation increased
+from +76% (step 8K) to +547% (step 20K), demonstrating that ablation
+sensitivity is not static — workspace components become more critical as
+the model develops precise calibration over training.</p>
+<section id="references">
+<h2>References</h2>
+<ol class="references-list">
+  <li id="ref-1">Ainslie, J., Lee-Thorp, J., de Jong, M., Zemlyanskiy, Y., Lebrón, F., &amp; Sanghai, S. (2023). GQA: Training Generalized Multi-Query Transformer Models from Multi-Head Checkpoints. <em>arXiv preprint arXiv:2305.13245</em>.</li>
+  <li id="ref-2">Allal, L. B., Lozhkov, A., Penedo, G., Wolf, T., &amp; von Werra, L. (2025). SmolLM2: When Smol Goes Big — Data-Centric Training of a Small Language Model. <em>Hugging Face Technical Report</em>.</li>
+  <li id="ref-3">Baars, B. J. (1988). <em>A Cognitive Theory of Consciousness</em>. Cambridge University Press.</li>
+  <li id="ref-4">Banino, A., Balaguer, J., &amp; Blundell, C. (2021). PonderNet: Learning to Ponder. <em>arXiv preprint arXiv:2107.05407</em>.</li>
+  <li id="ref-5">bloc97. (2023). NTK-Aware Scaled RoPE allows LLaMA models to have extended (8k+) context size without any fine-tuning and target length training. <em>Reddit, r/LocalLLaMA</em>.</li>
+  <li id="ref-6">Dao, T., Fu, D. Y., Ermon, S., Rudra, A., &amp; Ré, C. (2022). FlashAttention: Fast and Memory-Efficient Exact Attention with IO-Awareness. <em>Advances in Neural Information Processing Systems (NeurIPS)</em>, 35. arXiv:2205.14135.</li>
+  <li id="ref-7">DeepSeek-AI. (2024). DeepSeek-V2: A Strong, Economical, and Efficient Mixture-of-Experts Language Model. <em>arXiv preprint arXiv:2405.04434</em>.</li>
+  <li id="ref-8">Dehghani, M., Gouws, S., Vinyals, O., Uszkoreit, J., &amp; Kaiser, Ł. (2019). Universal Transformers. <em>International Conference on Learning Representations (ICLR)</em>. arXiv:1807.03819.</li>
+  <li id="ref-9">Fedus, W., Zoph, B., &amp; Shazeer, N. (2022). Switch Transformers: Scaling to Trillion Parameter Models with Simple and Efficient Sparsity. <em>Journal of Machine Learning Research (JMLR)</em>, 23(120), 1–39.</li>
+  <li id="ref-10">Gao, L., Tow, J., Abbasi, B., Biderman, S., Black, S., DiPofi, A., et al. (2023). A Framework for Few-Shot Language Model Evaluation. Zenodo. <a href="https://doi.org/10.5281/zenodo.10256836" target="_blank">https://doi.org/10.5281/zenodo.10256836</a></li>
+  <li id="ref-11">Graves, A. (2016). Adaptive Computation Time for Recurrent Neural Networks. <em>arXiv preprint arXiv:1603.08983</em>.</li>
+  <li id="ref-12">Graves, A., Wayne, G., &amp; Danihelka, I. (2014). Neural Turing Machines. <em>arXiv preprint arXiv:1410.5401</em>.</li>
+  <li id="ref-13">Graves, A., Wayne, G., Reynolds, M., Harley, T., Danihelka, I., Grabska-Barwińska, A., et al. (2016). Hybrid computing using a neural network with dynamic external memory. <em>Nature</em>, 538(7626), 471–476.</li>
+  <li id="ref-14">Gu, A., &amp; Dao, T. (2023). Mamba: Linear-Time Sequence Modeling with Selective State Spaces. <em>arXiv preprint arXiv:2312.00752</em>.</li>
+  <li id="ref-15">Loshchilov, I., &amp; Hutter, F. (2019). Decoupled Weight Decay Regularization. <em>International Conference on Learning Representations (ICLR)</em>. arXiv:1711.05101.</li>
+  <li id="ref-16">McInnes, L., Healy, J., &amp; Melville, J. (2018). UMAP: Uniform Manifold Approximation and Projection for Dimension Reduction. <em>arXiv preprint arXiv:1802.03426</em>.</li>
+  <li id="ref-17">Peng, B., Quesnelle, J., Fan, H., &amp; Shippole, E. (2023). YaRN: Efficient Context Window Extension of Large Language Models. <em>arXiv preprint arXiv:2309.00071</em>.</li>
+  <li id="ref-18">Penedo, G., Kydlíček, H., Lozhkov, A., Mitchell, M., Colin, C., von Werra, L., &amp; Wolf, T. (2024). The FineWeb Datasets: Decanting the Web for the Finest Text Data at Scale. <em>arXiv preprint arXiv:2406.17557</em>.</li>
+  <li id="ref-19">Radford, A., Wu, J., Child, R., Luan, D., Amodei, D., &amp; Sutskever, I. (2019). Language Models are Unsupervised Multitask Learners. <em>OpenAI Technical Report</em>.</li>
+  <li id="ref-20">Shazeer, N. (2020). GLU Variants Improve Transformer. <em>arXiv preprint arXiv:2002.05202</em>.</li>
+  <li id="ref-21">Su, J., Lu, Y., Pan, S., Murtadha, A., Wen, B., &amp; Liu, Y. (2021). RoFormer: Enhanced Transformer with Rotary Position Embedding. <em>arXiv preprint arXiv:2104.09864</em>.</li>
+  <li id="ref-22">Touvron, H., Lavril, T., Izacard, G., Martinet, X., Lachaux, M.-A., Lacroix, T., et al. (2023). LLaMA: Open and Efficient Foundation Language Models. <em>arXiv preprint arXiv:2302.13971</em>.</li>
+  <li id="ref-23">Vaswani, A., Shazeer, N., Parmar, N., Uszkoreit, J., Jones, L., Gomez, A. N., Kaiser, Ł., &amp; Polosukhin, I. (2017). Attention Is All You Need. <em>Advances in Neural Information Processing Systems (NeurIPS)</em>, 30. arXiv:1706.03762.</li>
+  <li id="ref-24">Zhang, B., &amp; Sennrich, R. (2019). Root Mean Square Layer Normalization. <em>Advances in Neural Information Processing Systems (NeurIPS)</em>, 32. arXiv:1910.07467.</li>
+</ol>
+</section>
+
+<script>
+  // Wrap every table in a scrollable container so it fills the column width
+  // while still allowing horizontal scrolling when content is wider than the viewport.
+  document.querySelectorAll('table').forEach(function(table) {
+    var wrapper = document.createElement('div');
+    wrapper.className = 'table-wrapper';
+    table.parentNode.insertBefore(wrapper, table);
+    wrapper.appendChild(table);
+  });
+
+  // Override Plotly's hardcoded inline width (e.g. "width:1200px") inside
+  // each iframe so charts fill 100% of the container, then auto-fit height.
+  document.querySelectorAll('.viz-frame-wrapper iframe').forEach(function(iframe) {
+    function resizeAndFit() {
+      try {
+        var iframeWin = iframe.contentWindow;
+        var doc = iframe.contentDocument || iframeWin.document;
+
+        // 1. Remove body margin/padding so chart fills the iframe edge-to-edge
+        doc.body.style.margin = '0';
+        doc.body.style.padding = '0';
+        doc.body.style.overflow = 'hidden';
+
+        // 2. Override hardcoded inline dimensions on the Plotly div(s)
+        //    and use Plotly.relayout to clear internal width/height, enabling autosize
+        var plots = doc.querySelectorAll('.plotly-graph-div');
+        var parent = doc.body.firstElementChild;
+        if (parent) {
+          parent.style.width = '100%';
+          parent.style.margin = '0';
+        }
+        plots.forEach(function(plot) {
+          plot.style.width = '100%';
+          plot.style.maxWidth = '100%';
+        });
+
+        // 3. Use Plotly.relayout to enable autosize and clear hardcoded layout dims
+        if (iframeWin.Plotly) {
+          plots.forEach(function(plot) {
+            try {
+              iframeWin.Plotly.relayout(plot, {autosize: true, width: null});
+            } catch(e) {}
+          });
+        }
+        iframeWin.dispatchEvent(new Event('resize'));
+
+        // 4. After re-render, measure actual content height and set iframe to match
+        setTimeout(function() {
+          try {
+            var h = Math.max(
+              doc.body.scrollHeight,
+              doc.body.offsetHeight,
+              doc.documentElement.scrollHeight,
+              doc.documentElement.offsetHeight
+            );
+            if (h > 50) iframe.style.height = (h + 4) + 'px';
+          } catch (e) {}
+        }, 800);
+      } catch (e) { /* cross-origin fallback: keep attribute height */ }
+    }
+
+    iframe.addEventListener('load', resizeAndFit);
+
+    // Re-fit when the browser window is resized
+    var resizeTimer;
+    window.addEventListener('resize', function() {
+      clearTimeout(resizeTimer);
+      resizeTimer = setTimeout(resizeAndFit, 250);
+    });
+  });
+</script>
+</body>
+</html>
